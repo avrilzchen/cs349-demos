@@ -1,9 +1,7 @@
 console.log("Loading mymodule ...");
 
-export function getSecret() {
+export default function getSecret() {
   return s;
 }
 
 let s = "secret";
-
-export {}; // force file to be a module
