@@ -65,26 +65,7 @@ function pathDemo(gc: CanvasRenderingContext2D) {
   gc.stroke();
 }
 
-function textDemo(gc: CanvasRenderingContext2D) {
-  const x = 150;
-  const y = 75;
-
-  // string uses same style as CSS font property
-  gc.font = "32pt sans-serif";
-  // standard alignment
-  gc.fillStyle = "blue";
-  gc.fillText("Hello", x, y);
-
-  // fully centred alignment
-  gc.textAlign = "center";
-  gc.textBaseline = "middle";
-  gc.fillStyle = "green";
-  gc.fillText("Hello", x, y);
-
-  // dot to show x,y location
-  gc.fillStyle = "red";
-  gc.fillRect(x - 2, y - 2, 4, 4);
-}
+//#region pathHouseDemo
 
 // array
 const housePoints = [
@@ -107,6 +88,31 @@ function pathHouseDemo(gc: CanvasRenderingContext2D) {
   });
   gc.closePath();
   gc.stroke();
+}
+
+//#endregion
+
+function textDemo(gc: CanvasRenderingContext2D) {
+  const x = 150;
+  const y = 75;
+
+  // string uses same style as CSS font property
+  gc.font = "32pt sans-serif";
+  // standard alignment
+  gc.textAlign = "left";
+  gc.textBaseline = "alphabetic";
+  gc.fillStyle = "blue";
+  gc.fillText("Hello", x, y);
+
+  // fully centred alignment
+  gc.textAlign = "center";
+  gc.textBaseline = "middle";
+  gc.fillStyle = "green";
+  gc.fillText("Hello", x, y);
+
+  // dot to show x,y location
+  gc.fillStyle = "red";
+  gc.fillRect(x - 2, y - 2, 4, 4);
 }
 
 function colourDemo(gc: CanvasRenderingContext2D) {
@@ -144,6 +150,7 @@ function saveStateDemo(gc: CanvasRenderingContext2D) {
 }
 
 //#region fpsDemo
+
 let frame = 0;
 let lastTime = 0;
 let fps = 60;

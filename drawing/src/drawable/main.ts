@@ -12,11 +12,11 @@ setSKDrawCallback((gc) => {
 });
 
 //#region squareDemo
-import { Square } from "./square";
+import { Square1, Square2 } from "./square";
 
-const redSquare = new Square(50, 50, 50);
-const blueSquare = new Square(250, 50, 50);
-const square = new Square(150, 50, 50);
+const redSquare = new Square1(50, 50, 50);
+const blueSquare = new Square1(250, 50, 50);
+const square = new Square1(150, 50, 50);
 
 function squareDemo(gc: CanvasRenderingContext2D) {
   gc.save();
@@ -41,17 +41,13 @@ function squareDemo(gc: CanvasRenderingContext2D) {
 //#endregion
 
 //#region paintersDemo
-import { Button } from "./button";
 import { Cat } from "./cat";
 
-const okButton = new Button(20, 10, 100, 32, "Ok");
-const cancelButton = new Button(140, 10, 100, 32, "Cancel");
-cancelButton.isHighlighted = true;
+const square2 = new Square2(100, 75, 100, "black");
 const cat = new Cat(50, 100);
 
 function paintersDemo(gc: CanvasRenderingContext2D) {
-  okButton.draw(gc);
-  cancelButton.draw(gc);
+  square2.draw(gc);
   cat.draw(gc);
 }
 //#endregion
@@ -62,14 +58,14 @@ import { DisplayList } from "./displaylist";
 
 const displayList = new DisplayList();
 
-const cat2 = new Cat(60, 80);
-
+const cat2 = new Cat(100, 60);
 displayList.add(cat2);
-displayList.add(new Button(5, 5, 50, 50, "A"));
-displayList.add(new Button(55, 5, 50, 50, "B"));
+
+displayList.add(new Square2(60, 50, 50, "red", "black", 3));
+displayList.add(new Square2(140, 50, 50, "blue", "black", 3));
 
 //#region random objects
-if (true) {
+if (false) {
   // useful for generating random numbers
   function random(lower: number, upper: number) {
     return lower + Math.random() * (upper - lower);
@@ -77,10 +73,9 @@ if (true) {
 
   for (let i = 0; i < 10; i++) {
     const w = random(25, 50);
-    const x = random(0, 150 - w);
-    const y = random(0, 150 - w);
-    const button = new Button(x, y, w, w, `${i}`);
-    displayList.add(button);
+    const x = random(25, 250 - w);
+    const y = random(25, 150 - w);
+    displayList.add(new Square2(x, y, w, "green", "black", 3));
   }
 }
 //#endregion
