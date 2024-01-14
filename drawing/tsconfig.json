@@ -17,7 +17,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Use SimpleKit by relative path to git submodule */
+    "paths": {
+      "simplekit/*": ["../simplekit/src/*"]
+    }
   },
   "include": ["src"]
 }
