@@ -1,7 +1,7 @@
 import { distance } from "simplekit/utility";
 
 // the simulated "raw" events from "window manager"
-import { FundamentalEvent } from "simplekit/create-loop";
+import { FundamentalEvent } from "simplekit/windowing-system";
 
 // simulated UI Toolkit events
 import {
