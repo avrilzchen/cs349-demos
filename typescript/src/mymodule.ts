@@ -1,6 +1,6 @@
 console.log("Loading mymodule ...");
 
-export default function getSecret() {
+export function getSecret() {
   return s;
 }
 
