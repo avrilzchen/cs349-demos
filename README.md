@@ -25,6 +25,8 @@ During the term frequently "pull" the latest code from this repo. You can do thi
 
 **Always pull from the cs349 public repo first.** The public repo may also update the simplekit submodule "link". If it does, then pull from it as well.
 
+> If you have your Gitlab credentials setup correctly, consider enabling Git Autofetch in VS Code. It will "fetch" changes from Gitlab every few minutes and tell you you need to pull to update.
+
 ## SimpleKit
 
 This is a simple imperative-style toolkit that runs in the browser. We use it to show examples of UI toolkit architecture and it's used in the first two assignments.
