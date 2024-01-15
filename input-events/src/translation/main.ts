@@ -3,7 +3,7 @@ import {
   SKKeyboardEvent,
   SKMouseEvent,
   SKResizeEvent,
-} from "simplekit/canvas";
+} from "simplekit/canvas-mode";
 
 import { setEventListener, startRunLoop } from "./run-loop";
 

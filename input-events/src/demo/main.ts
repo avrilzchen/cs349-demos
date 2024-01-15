@@ -13,7 +13,7 @@ import {
   setSKDrawCallback,
   setSKEventListener,
   startSimpleKit,
-} from "simplekit/canvas";
+} from "simplekit/canvas-mode";
 import { Square } from "./square";
 
 // drawable square (from Drawing lecture)

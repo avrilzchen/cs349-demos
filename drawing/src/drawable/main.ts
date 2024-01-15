@@ -1,4 +1,4 @@
-import { startSimpleKit, setSKDrawCallback } from "simplekit/canvas";
+import { startSimpleKit, setSKDrawCallback } from "simplekit/canvas-mode";
 
 startSimpleKit();
 

@@ -9,7 +9,7 @@ import {
   SKKeyboardEvent,
   SKMouseEvent,
   SKResizeEvent,
-} from "simplekit/canvas";
+} from "simplekit/canvas-mode";
 
 export type EventTranslator = {
   update: (fe: FundamentalEvent) => SKEvent | undefined;
