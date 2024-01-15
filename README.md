@@ -23,9 +23,9 @@ After you clone this repo, you'll have to do a bit more setup to run the demos.
 
 During the term frequently "pull" the latest code from this repo. You can do this from the VS Code "Source Control" interface or on the command line with git commands.
 
-**Always pull from the cs349 public repo first.** The public repo may also update the simplekit submodule "link". If it does, then pull from it as well.
+**Always pull from the cs349 public repo first.** The public repo _may_ also update the simplekit submodule "link". If it does, then git will show it as out of date and you need to pull from it as well.
 
-> If you have your Gitlab credentials setup correctly, consider enabling Git Autofetch in VS Code. It will "fetch" changes from Gitlab every few minutes and tell you you need to pull to update.
+> Avoid using VS Code git Autofetch for the SimpleKit submodule. It will "fetch" changes as suggest updating even if the main demo code repo is using a different version of SimpleKit. Only pull SimpleKit when the main repo updates the version.
 
 ## SimpleKit
 
