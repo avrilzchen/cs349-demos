@@ -5,7 +5,7 @@ import {
 } from "simplekit/windowing-system";
 
 // simulated UI Toolkit events
-import { SKEvent } from "simplekit/canvas";
+import { SKEvent } from "simplekit/canvas-mode";
 
 // event translators for this demo
 import {

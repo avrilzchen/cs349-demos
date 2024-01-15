@@ -15,7 +15,7 @@ function runLoop(eventQueue: FundamentalEvent[], time: number) {
     console.log(e);
   }
 
-  // real UI toolkit will have lots of other things to do here ...
+  // many other UI toolkit things in here ...
 }
 
 // create the simulated windowing system with
