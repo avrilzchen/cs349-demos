@@ -23,7 +23,9 @@ After you clone this repo, you'll have to do a bit more setup to run the demos.
 
 During the term frequently "pull" the latest code from this repo. You can do this from the VS Code "Source Control" interface or on the command line with git commands.
 
-**Always pull from the cs349 public repo first.** The public repo _may_ also update the simplekit submodule "link". If it does, then git will show it as out of date and you need to pull from it as well.
+**🔥 Always pull from the cs349 public repo first. 🔥** If the public repo updated the simplekit submodule "link", you'll see a "Change" for the "simplekit" submodule file after pulling ([see image](./_assets/git-pull.png)). **Don't try to commit that change!.** Instead, look at the git info for the simplekit submodule. It'll list 1 or more changes to be synced. Just click on "Sync Changes" for simplekit, and the changed "simplekit" submodule file in the main repo will disappear. Now the simplekit submodule is up-to-date.
+
+(There's a way to make this pulling and updating submodules more automated, but I think it's only possible in git command line and requires changes to your git config.)
 
 > Avoid using VS Code git Autofetch for the SimpleKit submodule. It will "fetch" changes as suggest updating even if the main demo code repo is using a different version of SimpleKit. Only pull SimpleKit when the main repo updates the version.
 
