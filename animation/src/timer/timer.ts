@@ -1,11 +1,11 @@
-//
+import { skTime } from "simplekit/utility";
 
 export class BasicTimer {
   constructor(public duration: number) {}
 
   private startTime: number | undefined;
 
-  start(time: number) {
+  start(time: number = skTime) {
     this.startTime = time;
     this._isRunning = true;
   }
