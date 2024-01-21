@@ -1,11 +1,12 @@
-import { skTime } from "simplekit/utility";
-
+/**
+ * A timer that you have to check if it's running
+ */
 export class BasicTimer {
   constructor(public duration: number) {}
 
   private startTime: number | undefined;
 
-  start(time: number = skTime) {
+  start(time: number) {
     this.startTime = time;
     this._isRunning = true;
   }
@@ -26,6 +27,9 @@ export class BasicTimer {
   }
 }
 
+/**
+ * A timer that calls a callback when it finishes
+ */
 export class CallbackTimer extends BasicTimer {
   constructor(
     public duration: number,

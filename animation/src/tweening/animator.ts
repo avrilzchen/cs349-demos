@@ -27,7 +27,7 @@ export class Animator {
     if (!this._isRunning || this.startTime === undefined) return;
 
     // proportion of time elapsed
-    const t = (time - this.startTime) / this.duration;
+    const t = Math.min(1, (time - this.startTime) / this.duration);
 
     // calculate the new value
     const value = lerp(this.startValue, this.endValue, t);

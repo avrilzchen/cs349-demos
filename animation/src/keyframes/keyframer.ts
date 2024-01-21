@@ -17,7 +17,10 @@ export class KeyFramer {
   update(time: number) {
     // find active keyframe segment
     let i = 0;
-    while (i < this.keyframes.length && this.keyframes[i].time < time) {
+    while (
+      i < this.keyframes.length &&
+      this.keyframes[i].time < time
+    ) {
       i++;
     }
 
@@ -29,13 +32,13 @@ export class KeyFramer {
     const k2 = this.keyframes[i];
 
     // time fraction
-    let t = Math.min((time - k1.time) / (k2.time - k1.time), 1);
+    let t = Math.min(1, (time - k1.time) / (k2.time - k1.time));
 
     // log the current state
     console.log(
-      `${Math.round(time)}, interval kf ${i - 1} (${k1.time}ms) to kf ${i} (${
-        k2.time
-      }ms) t ${Math.round(t * 100) / 100}`
+      `${Math.round(time)}, interval kf ${i - 1} (${
+        k1.time
+      }ms) to kf ${i} (${k2.time}ms) t ${Math.round(t * 100) / 100}`
     );
 
     // calculate the current animation state

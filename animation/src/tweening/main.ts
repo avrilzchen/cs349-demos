@@ -41,7 +41,7 @@ const animateDotX = new Animator(50, 300, 3000, (value) => {
   dot.x = value;
 });
 
-// could also use performance.now() to get current time to start
+// could also use skTime instead of 0
 animateDotX.start(0);
 
 startSimpleKit();

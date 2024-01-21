@@ -50,7 +50,7 @@ dot.y = 350;
 const animateDotX = new Animator(
   50,
   300,
-  2000,
+  1000,
   (value) => {
     dot.x = value;
     graph.add(value);

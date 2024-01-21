@@ -1,9 +1,8 @@
-export {}; // force module
-
 import {
   startSimpleKit,
   setSKDrawCallback,
   setSKAnimationCallback,
+  skTime,
 } from "simplekit/canvas-mode";
 
 import { BasicTimer, CallbackTimer } from "./timer";
@@ -27,18 +26,18 @@ dot.x = 100;
 dot.y = 100;
 
 // choose a demo to run
-simpleTimerDemo();
-// callbackTimerDemo();
+// simpleTimerDemo();
+callbackTimerDemo();
 
 startSimpleKit();
 
 function simpleTimerDemo() {
   let timeText = "";
 
-  // set the animation callback
+  // the animation callback
   setSKAnimationCallback((time) => {
     timer.update(time);
-    timeText = `${Math.round(time / 100) / 10}`;
+    timeText = `${(time / 1000).toFixed(1)}`;
   });
 
   setSKDrawCallback((gc) => {
@@ -59,10 +58,10 @@ function simpleTimerDemo() {
 function callbackTimerDemo() {
   let timeText = "";
 
-  // set the animation callback
+  // the animation callback
   setSKAnimationCallback((time) => {
     timer.update(time);
-    timeText = `${Math.round(time / 100) / 10}`;
+    timeText = `${(time / 1000).toFixed(1)}`;
   });
 
   setSKDrawCallback((gc) => {
@@ -82,5 +81,6 @@ function callbackTimerDemo() {
     isVisible = !isVisible;
     timer.start(t);
   });
-  timer.start(0);
+  // skTime is time in ms since SimpleKit started
+  timer.start(skTime);
 }

@@ -1,3 +1,5 @@
+// this demo doesn't use SimpleKit
+
 export {}; // force module
 
 // simple "Drawable" object
