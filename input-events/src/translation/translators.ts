@@ -21,7 +21,12 @@ export const fundamentalTranslator = {
       case "mousedown":
       case "mouseup":
       case "mousemove":
-        return new SKMouseEvent(fe.type, fe.timeStamp, fe.x || 0, fe.y || 0);
+        return new SKMouseEvent(
+          fe.type,
+          fe.timeStamp,
+          fe.x || 0,
+          fe.y || 0
+        );
         break;
       case "keydown":
       case "keyup":
@@ -39,37 +44,6 @@ export const fundamentalTranslator = {
       default:
         return new SKEvent(fe.type, fe.timeStamp);
     }
-  },
-};
-
-export const keypressTranslator = {
-  state: "IDLE",
-  // parameters for transitions
-  timeThreshold: 1000, // milliseconds
-  // for tracking thresholds
-  startTime: 0,
-
-  // returns a keypress event if found
-  update(fe: FundamentalEvent): SKKeyboardEvent | undefined {
-    switch (this.state) {
-      case "IDLE":
-        if (fe.type == "keydown") {
-          this.state = "DOWN";
-          this.startTime = fe.timeStamp;
-        }
-        break;
-
-      case "DOWN":
-        if (fe.timeStamp - this.startTime > this.timeThreshold) {
-          this.state = "IDLE";
-        } else if (fe.type == "keyup") {
-          this.state = "IDLE";
-          return new SKKeyboardEvent("keypress", fe.timeStamp, fe.key);
-        }
-
-        break;
-    }
-    return;
   },
 };
 
@@ -107,7 +81,12 @@ export const clickTranslator = {
           this.state = "IDLE";
         } else if (fe.type == "mouseup") {
           this.state = "IDLE";
-          return new SKMouseEvent("click", fe.timeStamp, fe.x || 0, fe.y || 0);
+          return new SKMouseEvent(
+            "click",
+            fe.timeStamp,
+            fe.x || 0,
+            fe.y || 0
+          );
         }
         break;
     }

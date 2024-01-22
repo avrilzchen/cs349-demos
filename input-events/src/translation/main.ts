@@ -20,7 +20,6 @@ function handleEvent(e: SKEvent) {
       break;
     case "keydown":
     case "keyup":
-    case "keypress":
       const { key } = e as SKKeyboardEvent;
       console.log(`${e.type} '${key}' at ${e.timeStamp} `);
       break;

@@ -12,7 +12,6 @@ import {
   EventTranslator,
   fundamentalTranslator,
   clickTranslator,
-  keypressTranslator,
   dblclickTranslator,
   dragTranslator,
 } from "./translators";
@@ -39,7 +38,10 @@ function coalesceEvents(
   });
 }
 
-export function runLoop(eventQueue: FundamentalEvent[], time: number) {
+export function runLoop(
+  eventQueue: FundamentalEvent[],
+  time: number
+) {
   // fundamental event queue coalescing
   coalesceEvents(eventQueue);
 
@@ -82,7 +84,6 @@ let drawCallback: DrawCallback;
 
 const translators: EventTranslator[] = [
   fundamentalTranslator,
-  keypressTranslator,
   clickTranslator,
   dblclickTranslator,
   dragTranslator,
@@ -90,7 +91,9 @@ const translators: EventTranslator[] = [
 
 export function addEventTranslator(translator: EventTranslator) {
   translators.push(translator);
-  console.log(`added event translator, now ${translators.length} translators`);
+  console.log(
+    `added event translator, now ${translators.length} translators`
+  );
 }
 
 // save the canvas context for the draw callback

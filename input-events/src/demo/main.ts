@@ -38,7 +38,7 @@ function handleEvent(e: SKEvent) {
     case "dblclick":
       square.size = 50;
       break;
-    case "keypress":
+    case "keydown":
       square.fill = "pink";
       break;
   }
