@@ -2,6 +2,7 @@ import {
   startSimpleKit,
   setSKDrawCallback,
   setSKAnimationCallback,
+  skTime,
 } from "simplekit/canvas-mode";
 
 import {
@@ -68,7 +69,7 @@ const graph = {
   data: [] as { t: number; p: number }[],
 
   add(value: number) {
-    const t = performance.now() / animateDotX.duration;
+    const t = skTime / animateDotX.duration;
     const p = lerp(
       0,
       1,

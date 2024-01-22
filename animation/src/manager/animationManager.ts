@@ -1,3 +1,5 @@
+import { skTime } from "simplekit/canvas-mode";
+// local import
 import { Animator } from "./animator";
 
 export * from "./animator";
@@ -8,7 +10,7 @@ class AnimationManager {
   add(animation: Animator) {
     this.animations.push(animation);
     // TODO: should have more flexible way to start animation
-    animation.start(performance.now());
+    animation.start(skTime);
   }
 
   update(time: number) {

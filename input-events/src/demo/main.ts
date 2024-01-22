@@ -14,6 +14,7 @@ import {
   setSKEventListener,
   startSimpleKit,
 } from "simplekit/canvas-mode";
+// local import
 import { Square } from "./square";
 
 // drawable square (from Drawing lecture)
