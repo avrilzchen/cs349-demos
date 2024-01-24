@@ -64,7 +64,7 @@ export function edgeHitTestPolygon(
   const m = new Point2(mx, my);
   // assume shape is closed, so start with segment
   // from last point to first point
-  let [p0] = points; //.slice(-1)[0];
+  let [p0] = points; // extract first point
   for (let p1 of points) {
     if (hitTestLine(m.x, m.y, p0.x, p0.y, p1.x, p1.y, strokeWidth))
       return true;
