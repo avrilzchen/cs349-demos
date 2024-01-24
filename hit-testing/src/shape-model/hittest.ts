@@ -49,7 +49,7 @@ export function hitTestLine(
   const m = point(mx, my);
   const q = closestPoint(m, point(p0x, p0y), point(p1x, p1y));
   const d = distance(m.x, m.y, q.x, q.y);
-  if (d < strokeWidth / 2) return true;
+  if (d <= strokeWidth / 2) return true;
 
   // no hit
   return false;

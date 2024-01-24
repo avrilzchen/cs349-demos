@@ -31,6 +31,9 @@ export class Polygon extends Shape {
         this.strokeWidth
       );
     }
+
+    // NOTE: inside hit test isn't implemented
+
     return hit;
   }
 }
