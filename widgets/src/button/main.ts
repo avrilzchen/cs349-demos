@@ -3,12 +3,17 @@ import {
   setSKDrawCallback,
   setSKEventListener,
   SKMouseEvent,
-} from "simplekit/imperative-mode";
+} from "simplekit/canvas-mode";
 
 import { SKButton } from "./button.ts";
 
 // create a test button
-const button = new SKButton("Test", 50, 50, 120);
+const button = new SKButton({
+  text: "Test",
+  x: 50,
+  y: 50,
+  width: 100,
+});
 
 setSKEventListener((e) => {
   // test button behaviour
@@ -17,7 +22,7 @@ setSKEventListener((e) => {
       {
         if (button.state !== "down") {
           const { x, y } = e as SKMouseEvent;
-          if (button.hittest(x, y)) {
+          if (button.hitTest(x, y)) {
             button.state = "hover";
           } else {
             button.state = "idle";
@@ -29,7 +34,7 @@ setSKEventListener((e) => {
     case "mousedown":
       {
         const { x, y } = e as SKMouseEvent;
-        if (button.hittest(x, y)) {
+        if (button.hitTest(x, y)) {
           button.state = "down";
         }
       }

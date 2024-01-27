@@ -2,42 +2,41 @@ import {
   insideHitTestRectangle,
   measureText,
 } from "simplekit/utility";
-import {
-  SKElement,
-  Style,
-  Settings,
-} from "simplekit/imperative-mode";
+import { SKElement, SKElementProps, Style } from "../element";
+
+type SKTextfieldProps = SKElementProps & {
+  text?: string;
+};
 
 export class SKTextfield extends SKElement {
-  state: "idle" | "hover" = "idle";
-  focus = false;
-
-  font = Style.font;
-
   // find size of text to set height (and width if not specified)
-  constructor(
-    public text: string,
-    x: number,
-    y: number,
-    width?: number
-  ) {
-    super(x, y);
-    this.text = text;
+  constructor({ text, ...elementProps }: SKTextfieldProps = {}) {
+    super(elementProps);
 
-    // if no width or height is specified, calculate the size
-    const m = measureText(text, this.font);
+    // label-specific properties
+    this.text = text || "?";
+
+    // find size of text to set height (and width if not specified)
+    const m = measureText(this.text, this.font);
 
     if (!m) {
-      console.warn(`measureText failed in SKTextfield for ${text}`);
+      console.warn(`measureText failed in SKLabel for ${text}`);
       return;
     }
 
-    this.height =
-      m.fontBoundingBoxAscent +
-      m.fontBoundingBoxDescent +
-      Style.textPadding;
-    this.width = width || m.width + Style.textPadding * 2;
+    // set the height
+    this.height = m.height + Style.textPadding * 2;
+
+    // set the width from measure text unless specified in constructor
+    this.width =
+      elementProps.width || m.width + Style.textPadding * 2;
   }
+
+  text: string;
+  font = Style.font;
+
+  state: "idle" | "hover" = "idle";
+  focus = false;
 
   applyEdit(text: string, key: string): string {
     if (key == "Backspace") {
@@ -45,17 +44,6 @@ export class SKTextfield extends SKElement {
     } else if (key.length == 1) {
       return text + key;
     } else return text;
-  }
-
-  hittest(mx: number, my: number): boolean {
-    return insideHitTestRectangle(
-      mx,
-      my,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
   }
 
   draw(gc: CanvasRenderingContext2D) {
@@ -104,9 +92,5 @@ export class SKTextfield extends SKElement {
     );
 
     gc.restore();
-  }
-
-  public toString(): string {
-    return `SKTextfield '${this.text}' id:${this.id}`;
   }
 }

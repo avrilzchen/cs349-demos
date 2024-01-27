@@ -1,12 +1,16 @@
 import {
   startSimpleKit,
   setSKDrawCallback,
-} from "simplekit/imperative-mode";
+} from "simplekit/canvas-mode";
 
 import { SKLabel } from "./label.ts";
 
 // create a test label
-const label = new SKLabel("Test Label", 50, 50);
+const label = new SKLabel({
+  text: "Test Label",
+  x: 50,
+  y: 50,
+});
 // can change other properties
 // label.width = 200;
 // label.align = "right";

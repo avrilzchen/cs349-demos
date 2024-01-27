@@ -1,37 +1,21 @@
-import { insideHitTestRectangle } from "simplekit/utility";
+import {
+  edgeHitTestRectangle,
+  insideHitTestRectangle,
+} from "simplekit/utility";
 
-import * as Style from "./style";
-import { SKElement } from "./element";
+import { SKElement, SKElementProps, Style } from "../element";
+
+type SKButtonProps = SKElementProps & { text?: string };
 
 export class SKButton extends SKElement {
-  state: "idle" | "hover" | "down" = "idle";
+  constructor({ text, ...elementProps }: SKButtonProps = {}) {
+    super(elementProps);
+    this.text = text || "?";
+  }
 
+  text: string;
   font = Style.font;
-
-  constructor(
-    public text: string,
-    x: number,
-    y: number,
-    width: number,
-    height?: number
-  ) {
-    super();
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height || Style.widgetHeight;
-  }
-
-  hittest(mx: number, my: number): boolean {
-    return insideHitTestRectangle(
-      mx,
-      my,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
-  }
+  state: "idle" | "hover" | "down" = "idle";
 
   draw(gc: CanvasRenderingContext2D) {
     gc.save();

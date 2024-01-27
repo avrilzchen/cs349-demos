@@ -1,44 +1,47 @@
 import { measureText } from "simplekit/utility";
 
-import {
-  SKElement,
-  Style,
-  Settings,
-} from "simplekit/imperative-mode";
+import { SKElement, SKElementProps, Style } from "../element";
+
+type LabelAlign = "centre" | "left" | "right";
+
+type SKLabelProps = SKElementProps & {
+  text?: string;
+  align?: LabelAlign;
+};
 
 export class SKLabel extends SKElement {
-  align: "centre" | "left" | "right" = "centre";
+  constructor({ text, align, ...elementProps }: SKLabelProps = {}) {
+    super(elementProps);
 
-  font = Style.font;
-
-  constructor(
-    public text: string,
-    x: number,
-    y: number,
-    width?: number
-  ) {
-    super(x, y);
+    // label-specific properties
+    this.text = text || "?";
+    this.align = align || "centre";
 
     // find size of text to set height (and width if not specified)
-    const m = measureText(text, this.font);
+    const m = measureText(this.text, this.font);
 
     if (!m) {
       console.warn(`measureText failed in SKLabel for ${text}`);
       return;
     }
 
-    this.height =
-      m.fontBoundingBoxAscent +
-      m.fontBoundingBoxDescent +
-      Style.textPadding;
-    this.width = width || m.width + Style.textPadding * 2;
+    // set the height
+    this.height = m.height + Style.textPadding * 2;
+
+    // set the width from measure text unless specified in constructor
+    this.width =
+      elementProps.width || m.width + Style.textPadding * 2;
   }
+
+  text: string;
+  font = Style.font;
+  align: LabelAlign;
 
   draw(gc: CanvasRenderingContext2D) {
     gc.save();
 
-    // border (for debug)
-    if (Settings.debug) {
+    // show dashed border (for debug)
+    if (true) {
       gc.strokeStyle = "grey";
       gc.setLineDash([3, 3]);
       gc.strokeRect(this.x, this.y, this.width, this.height);

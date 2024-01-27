@@ -4,12 +4,17 @@ import {
   setSKEventListener,
   SKMouseEvent,
   SKKeyboardEvent,
-} from "simplekit/imperative-mode";
+} from "simplekit/canvas-mode";
 
 import { SKTextfield } from "./textfield.ts";
 
 // create a test label
-const textfield = new SKTextfield("Hello Textfield", 50, 50, 150);
+const textfield = new SKTextfield({
+  text: "Hello Textfield",
+  x: 50,
+  y: 50,
+  width: 150,
+});
 
 setSKEventListener((e) => {
   switch (e.type) {
@@ -17,7 +22,7 @@ setSKEventListener((e) => {
       {
         // testing mouseexit/mouseenter behaviour
         const { x, y } = e as SKMouseEvent;
-        if (textfield.hittest(x, y)) {
+        if (textfield.hitTest(x, y)) {
           textfield.state = "hover";
         } else {
           textfield.state = "idle";
@@ -28,7 +33,7 @@ setSKEventListener((e) => {
       {
         // test getting and losing keyboard focus
         const { x, y } = e as SKMouseEvent;
-        if (textfield.hittest(x, y)) {
+        if (textfield.hitTest(x, y)) {
           textfield.focus = true;
         } else {
           textfield.focus = false;
@@ -36,9 +41,9 @@ setSKEventListener((e) => {
       }
       break;
 
-    case "keypress":
+    case "keydown":
       const { key } = e as SKKeyboardEvent;
-      // test editing text
+      // test editing text (only when focused)
       if (textfield.focus && key) {
         textfield.text = textfield.applyEdit(textfield.text, key);
       }
