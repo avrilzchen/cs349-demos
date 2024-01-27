@@ -8,10 +8,30 @@ import {
 
 let counter = 0;
 
-const root = new SKContainer(10, 10, 300, 300);
-const increaseButton = new SKButton("Increase", 30, 30, 100);
-const textfield = new SKTextfield("0", 30, 80, 100);
-const clearButton = new SKButton("Clear", 30, 150, 100);
+const root = new SKContainer({
+  x: 10,
+  y: 10,
+  width: 300,
+  height: 300,
+});
+const increaseButton = new SKButton({
+  text: "Increase",
+  x: 30,
+  y: 30,
+  width: 100,
+});
+const textfield = new SKTextfield({
+  text: "0",
+  x: 30,
+  y: 80,
+  width: 100,
+});
+const clearButton = new SKButton({
+  text: "Clear",
+  x: 30,
+  y: 150,
+  width: 100,
+});
 
 // build widget tree
 root.addChild(increaseButton);

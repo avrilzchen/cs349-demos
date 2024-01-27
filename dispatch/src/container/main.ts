@@ -5,19 +5,30 @@ import {
   SKContainer,
 } from "simplekit/imperative-mode";
 
-const blueContainer = new SKContainer(50, 20, 200, 175);
+const blueContainer = new SKContainer({
+  x: 50,
+  y: 20,
+  width: 200,
+  height: 175,
+});
 blueContainer.fill = "lightblue";
 
-const buttonB = new SKButton("B", 10, 10, 80);
+const buttonB = new SKButton({ text: "B", x: 10, y: 10, width: 80 });
 blueContainer.addChild(buttonB);
 
-const greenContainer = new SKContainer(20, 80, 150, 75);
+const greenContainer = new SKContainer({
+  x: 20,
+  y: 80,
+  width: 150,
+  height: 75,
+});
 greenContainer.fill = "lightgreen";
 
-const buttonA = new SKButton("A", 10, 10, 80);
+const buttonA = new SKButton({ text: "A", x: 10, y: 10, width: 80 });
 greenContainer.addChild(buttonA);
 
 // try adding the green container to the blue container
+// (remove the green container form the draw callback too)
 // blueContainer.addChild(greenContainer);
 
 setSKDrawCallback((gc) => {

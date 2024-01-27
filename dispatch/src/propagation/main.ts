@@ -5,19 +5,33 @@ import {
   setSKDrawCallback,
   setSKEventListener,
   SKMouseEvent,
-  setSKRoot,
   SKElement,
   SKContainer,
 } from "simplekit/imperative-mode";
 
 // this will be the "root" of the UI widget tree
-const redContainer = new SKContainer(20, 20, 140, 140);
+const redContainer = new SKContainer({
+  x: 20,
+  y: 20,
+  width: 140,
+  height: 140,
+});
 redContainer.fill = "red";
 
-const orangeContainer = new SKContainer(20, 20, 100, 100);
+const orangeContainer = new SKContainer({
+  x: 20,
+  y: 20,
+  width: 100,
+  height: 100,
+});
 orangeContainer.fill = "orange";
 
-const yellowContainer = new SKContainer(20, 20, 60, 60);
+const yellowContainer = new SKContainer({
+  x: 20,
+  y: 20,
+  width: 60,
+  height: 60,
+});
 yellowContainer.fill = "yellow";
 
 yellowContainer.addEventListener("action", (e) => {
@@ -70,7 +84,7 @@ function buildTargetRoute(
     );
   }
   // console.log(`? ${element.toString()}`);
-  if (element.hittest(mx, my)) {
+  if (element.hitTest(mx, my)) {
     return [element, ...route];
   } else {
     return route;

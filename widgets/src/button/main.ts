@@ -12,7 +12,7 @@ const button = new SKButton({
   text: "Test",
   x: 50,
   y: 50,
-  width: 100,
+  // width: 100,
 });
 
 setSKEventListener((e) => {

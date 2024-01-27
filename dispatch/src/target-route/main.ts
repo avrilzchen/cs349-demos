@@ -3,30 +3,41 @@ import {
   setSKDrawCallback,
   setSKEventListener,
   SKMouseEvent,
-  setSKRoot,
   SKElement,
   SKButton,
   SKContainer,
-} from "simplekit/imperative-mode";";
+} from "simplekit/imperative-mode";
 
 // this will be the "root" of the UI widget tree
-const blueContainer = new SKContainer(50, 20, 200, 175);
+const blueContainer = new SKContainer({
+  x: 50,
+  y: 20,
+  width: 200,
+  height: 175,
+});
 blueContainer.fill = "lightblue";
 
-const buttonB = new SKButton("B", 10, 10, 80);
+const buttonB = new SKButton({ text: "B", x: 10, y: 10, width: 80 });
 // try moving this to after the greenContainer is added
 blueContainer.addChild(buttonB);
 
-const greenContainer = new SKContainer(20, 60, 150, 75);
+const greenContainer = new SKContainer({
+  x: 20,
+  y: 60,
+  width: 150,
+  height: 75,
+});
 greenContainer.fill = "lightgreen";
 
-const buttonA = new SKButton("A", 10, 10, 80);
+const buttonA = new SKButton({ text: "A", x: 10, y: 10, width: 80 });
 greenContainer.addChild(buttonA);
 
 blueContainer.addChild(greenContainer);
 
 // try adding a third button and look at the console output
-// blueContainer.addChild(new SKButton("C", 100, 10, 80));
+// blueContainer.addChild(
+//   new SKButton({ text: "C", x: 100, y: 10, width: 80 })
+// );
 
 setSKDrawCallback((gc) => {
   gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
@@ -67,7 +78,7 @@ function buildTargetRoute(
     );
   }
   console.log(`? ${element.toString()}`);
-  if (element.hittest(mx, my)) {
+  if (element.hitTest(mx, my)) {
     return [element, ...route];
   } else {
     return route;

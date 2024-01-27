@@ -6,10 +6,15 @@ import {
   SKButton,
 } from "simplekit/imperative-mode";
 
-const button = new SKButton("Button", 30, 30, 100);
+const button = new SKButton({
+  text: "Button",
+  x: 30,
+  y: 30,
+  width: 100,
+});
 
 button.addEventListener("action", (e) => {
-  console.log("button was clicked!");
+  console.log("button was clicked! 🤯");
 });
 
 // fake the toolkit event dispatch through tree,
@@ -17,7 +22,7 @@ button.addEventListener("action", (e) => {
 setSKEventListener((e) => {
   if (e.type == "mouseup") {
     const me = e as SKMouseEvent;
-    if (button.hittest(me.x, me.y)) {
+    if (button.hitTest(me.x, me.y)) {
       button.handleMouseEvent(me);
     }
   }
