@@ -1,7 +1,4 @@
-import {
-  insideHitTestRectangle,
-  measureText,
-} from "simplekit/utility";
+import { measureText } from "simplekit/utility";
 import { SKElement, SKElementProps, Style } from "../element";
 
 type SKTextfieldProps = SKElementProps & {
@@ -9,11 +6,9 @@ type SKTextfieldProps = SKElementProps & {
 };
 
 export class SKTextfield extends SKElement {
-  // find size of text to set height (and width if not specified)
   constructor({ text, ...elementProps }: SKTextfieldProps = {}) {
     super(elementProps);
 
-    // label-specific properties
     this.text = text || "?";
 
     // find size of text to set height (and width if not specified)

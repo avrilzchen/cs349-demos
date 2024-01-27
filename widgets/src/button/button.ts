@@ -1,8 +1,3 @@
-import {
-  edgeHitTestRectangle,
-  insideHitTestRectangle,
-} from "simplekit/utility";
-
 import { SKElement, SKElementProps, Style } from "../element";
 
 type SKButtonProps = SKElementProps & { text?: string };
