@@ -4,6 +4,8 @@ import {
   SKButton,
   SKTextfield,
   SKContainer,
+  SKLabel,
+  setSKEventListener,
 } from "simplekit/imperative-mode";
 
 let counter = 0;
@@ -21,38 +23,56 @@ const increaseButton = new SKButton({
   y: 30,
   width: 100,
 });
-const textfield = new SKTextfield({
+const c2 = new SKContainer({ x: 30, y: 70, width: 150, height: 40 });
+c2.fill = "lightblue";
+c2.box.padding = 10;
+const label = new SKLabel({
+  text: "By",
+  x: 0,
+  y: 0,
+});
+const inc = new SKTextfield({
+  text: "1",
+  x: 40,
+  y: 0,
+  width: 100,
+});
+c2.addChild(label);
+c2.addChild(inc);
+
+const total = new SKTextfield({
   text: "0",
   x: 30,
-  y: 80,
+  y: 140,
   width: 100,
 });
 const clearButton = new SKButton({
   text: "Clear",
   x: 30,
-  y: 150,
+  y: 180,
   width: 100,
 });
 
 // build widget tree
 root.addChild(increaseButton);
-root.addChild(textfield);
+root.addChild(total);
 root.addChild(clearButton);
+root.addChild(c2);
 
 // set up event listeners
 increaseButton.addEventListener("action", (e) => {
   console.log("incrementButton action!");
-  counter++;
-  textfield.text = counter.toString();
+  counter = counter += Number.parseInt(inc.text);
+  total.text = counter.toString();
 });
 
 clearButton.addEventListener("action", (e) => {
   console.log("clearButton action!");
   counter = 0;
-  textfield.text = counter.toString();
+  total.text = counter.toString();
 });
 
-textfield.addEventListener("textchanged", (e) => {
+total.addEventListener("textchanged", (e) => {
   const tf = e.source as SKTextfield;
   console.log(`textfield textchanged '${tf.text}'`);
   tf.text = tf.text.replace(/[^0-9]/g, ""); // simple text validation
@@ -61,5 +81,11 @@ textfield.addEventListener("textchanged", (e) => {
 
 // all SimpleKit needs is the root element
 setSKRoot(root);
+
+setSKEventListener((e) => {
+  if (["click", "mouseexit", "mouseenter"].includes(e.type)) {
+    // console.log(e);
+  }
+});
 
 startSimpleKit();

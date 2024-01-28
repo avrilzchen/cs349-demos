@@ -72,11 +72,13 @@ function buildTargetRoute(
   element: SKElement
 ): SKElement[] {
   const route: SKElement[] = [];
+  // only SKContainers have children to traverse
   if (element instanceof SKContainer) {
     (element as SKContainer).children.forEach((child) =>
       route.push(
         ...buildTargetRoute(
-          mx - element.x, // translate to child coord system
+          // translate to child coord system
+          mx - element.x,
           my - element.y,
           child
         )
@@ -92,7 +94,7 @@ function buildTargetRoute(
 }
 
 function dispatch(me: SKMouseEvent, root: SKElement) {
-  let route = buildTargetRoute(me.x, me.y, root);
+  const route = buildTargetRoute(me.x, me.y, root);
 
   // capture
   const stopPropagation = !route.every((element) => {
