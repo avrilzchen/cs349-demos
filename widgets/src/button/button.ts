@@ -6,9 +6,9 @@ import { SKElement, SKElementProps, Style } from "../element";
 type SKButtonProps = SKElementProps & { text?: string };
 
 export class SKButton extends SKElement {
-  constructor({ text, ...elementProps }: SKButtonProps = {}) {
+  constructor({ text = "?", ...elementProps }: SKButtonProps = {}) {
     super(elementProps);
-    this.text = text || "?";
+    this.text = text;
   }
 
   text: string;
