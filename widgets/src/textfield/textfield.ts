@@ -1,3 +1,6 @@
+// simple version SKTextfield
+// (version in SimpleKit has more features)
+
 import { measureText } from "simplekit/utility";
 import { SKElement, SKElementProps, Style } from "../element";
 
@@ -9,13 +12,15 @@ export class SKTextfield extends SKElement {
   constructor({ text, ...elementProps }: SKTextfieldProps = {}) {
     super(elementProps);
 
-    this.text = text || "?";
+    this._text = text || "?";
 
     // find size of text to set height (and width if not specified)
-    const m = measureText(this.text, this.font);
+    const m = measureText(this._text, this.font);
 
     if (!m) {
-      console.warn(`measureText failed in SKLabel for ${text}`);
+      console.warn(
+        `measureText failed in SKTextfield with '${text}'`
+      );
       return;
     }
 
@@ -23,12 +28,23 @@ export class SKTextfield extends SKElement {
     this.height = m.height + Style.textPadding * 2;
 
     // set the width from measure text unless specified in constructor
+    this.textWidth = m.width;
     this.width =
-      elementProps.width || m.width + Style.textPadding * 2;
+      elementProps.width || this.textWidth + Style.textPadding * 2;
   }
 
-  text: string;
+  protected _text: string;
+  get text() {
+    return this._text;
+  }
+  set text(t: string) {
+    this._text = t;
+    const m = measureText(this._text, this.font);
+    if (m) this.textWidth = m.width;
+  }
+
   font = Style.font;
+  textWidth = 0;
 
   state: "idle" | "hover" = "idle";
   focus = false;
@@ -63,6 +79,9 @@ export class SKTextfield extends SKElement {
     gc.lineWidth = 1;
     gc.strokeStyle = this.focus ? Style.focusColour : "black";
     gc.stroke();
+    // clip text if it's wider than text area
+    // TODO: could scroll text if it's wider than text area
+    gc.clip();
 
     // TODO: highlight text
     if (false) {
@@ -81,10 +100,22 @@ export class SKTextfield extends SKElement {
     gc.textBaseline = "middle";
     gc.textAlign = "left";
     gc.fillText(
-      this.text,
+      this._text,
       this.x + padding,
       this.y + this.height / 2
     );
+
+    // simple cursor
+    if (this.focus) {
+      const cursorX = this.x + padding + this.textWidth + 1;
+      const cursorHeight = this.height - Style.textPadding;
+      gc.beginPath();
+      gc.moveTo(cursorX, this.y + Style.textPadding / 2);
+      gc.lineTo(cursorX, this.y + cursorHeight);
+      gc.lineWidth = 1;
+      gc.strokeStyle = "black";
+      gc.stroke();
+    }
 
     gc.restore();
   }

@@ -1,9 +1,9 @@
 import {
   startSimpleKit,
   setSKDrawCallback,
-  SKButton,
 } from "simplekit/imperative-mode";
 
+import { SKButton } from "../button/button";
 import { SKContainer } from "./container";
 
 const blueContainer = new SKContainer({
@@ -15,6 +15,7 @@ const blueContainer = new SKContainer({
 blueContainer.fill = "lightblue";
 
 const buttonB = new SKButton({ text: "B", x: 10, y: 10, width: 80 });
+blueContainer.addChild(buttonB);
 
 const greenContainer = new SKContainer({
   x: 20,
@@ -25,15 +26,16 @@ const greenContainer = new SKContainer({
 greenContainer.fill = "lightgreen";
 
 const buttonA = new SKButton({ text: "A", x: 10, y: 10, width: 80 });
-
-// build the tree
-blueContainer.addChild(buttonB);
-blueContainer.addChild(greenContainer);
 greenContainer.addChild(buttonA);
+
+// try adding the green container to the blue container
+// (remove the green container form the draw callback too)
+// blueContainer.addChild(greenContainer);
 
 setSKDrawCallback((gc) => {
   gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
   blueContainer.draw(gc);
+  greenContainer.draw(gc);
 });
 
 startSimpleKit();

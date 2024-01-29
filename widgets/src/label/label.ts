@@ -1,3 +1,6 @@
+// simple version SKLabel
+// (version in SimpleKit has more features)
+
 import { measureText } from "simplekit/utility";
 
 import { SKElement, SKElementProps, Style } from "../element";
@@ -21,7 +24,7 @@ export class SKLabel extends SKElement {
     const m = measureText(this.text, this.font);
 
     if (!m) {
-      console.warn(`measureText failed in SKLabel for ${text}`);
+      console.warn(`measureText failed in SKLabel with '${text}'`);
       return;
     }
 

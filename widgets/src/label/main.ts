@@ -14,7 +14,6 @@ const label = new SKLabel({
 // can change other properties
 // label.width = 200;
 // label.align = "right";
-// label.font = "25px sans-serif";
 
 setSKDrawCallback((gc) => {
   gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);

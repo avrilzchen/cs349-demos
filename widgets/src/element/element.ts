@@ -1,3 +1,6 @@
+// simple version SKElement
+// (version in SimpleKit has more features)
+
 import { insideHitTestRectangle } from "simplekit/utility";
 
 const minElementSize = 32;
@@ -28,7 +31,7 @@ export abstract class SKElement {
   x = 0;
   y = 0;
 
-  // size of bounding box
+  // size of element's bounding box
   width = minElementSize;
   height = minElementSize;
 

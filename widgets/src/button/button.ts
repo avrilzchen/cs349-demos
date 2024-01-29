@@ -1,3 +1,6 @@
+// simple version SKButton
+// (version in SimpleKit has more features)
+
 import { SKElement, SKElementProps, Style } from "../element";
 
 type SKButtonProps = SKElementProps & { text?: string };
