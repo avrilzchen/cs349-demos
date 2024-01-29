@@ -34,3 +34,5 @@ During the term frequently "pull" the latest code from this repo. You can do thi
 This is a simple imperative-style toolkit that runs in the browser. We use it to show examples of UI toolkit architecture and it's used in the first two assignments.
 
 See lecture demos for examples how to use SimpleKit, and see assignment write-ups for details how to setup SimpleKit for assignments.
+
+-
