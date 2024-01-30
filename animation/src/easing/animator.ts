@@ -62,7 +62,7 @@ export class Animator {
     // call the update callback
     this.updateValue(value);
 
-    if (t >= 1) {
+    if (t === 1) {
       this.startTime = undefined;
       this._isRunning = false;
     }

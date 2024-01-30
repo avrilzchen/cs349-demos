@@ -50,7 +50,7 @@ export class Animator {
     if (!this._isRunning || this.startTime === undefined) return;
 
     // proportion of time elapsed
-    const t = (time - this.startTime) / this.duration;
+    const t = Math.min(1, (time - this.startTime) / this.duration);
 
     // calculate the new value
     const value = lerp(
@@ -62,7 +62,7 @@ export class Animator {
     // call the update callback
     this.updateValue(value);
 
-    if (t >= 1) {
+    if (t === 1) {
       this.startTime = undefined;
       this._isRunning = false;
       console.log("animation finished");
