@@ -9,10 +9,13 @@ type SKTextfieldProps = SKElementProps & {
 };
 
 export class SKTextfield extends SKElement {
-  constructor({ text, ...elementProps }: SKTextfieldProps = {}) {
+  constructor({
+    text = "?",
+    ...elementProps
+  }: SKTextfieldProps = {}) {
     super(elementProps);
 
-    this._text = text || "?";
+    this._text = text;
 
     // find size of text to set height (and width if not specified)
     const m = measureText(this._text, this.font);

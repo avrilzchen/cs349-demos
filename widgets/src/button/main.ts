@@ -9,7 +9,7 @@ import { SKButton } from "./button.ts";
 
 import { Style } from "../element/style";
 
-Style.highlightColour = "lightgreen";
+// Style.highlightColour = "lightgreen";
 
 // create a test button
 const button = new SKButton({

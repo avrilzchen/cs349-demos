@@ -13,12 +13,16 @@ type SKLabelProps = SKElementProps & {
 };
 
 export class SKLabel extends SKElement {
-  constructor({ text, align, ...elementProps }: SKLabelProps = {}) {
+  constructor({
+    text = "?",
+    align = "centre",
+    ...elementProps
+  }: SKLabelProps = {}) {
     super(elementProps);
 
     // label-specific properties
-    this.text = text || "?";
-    this.align = align || "centre";
+    this.text = text;
+    this.align = align;
 
     // find size of text to set height (and width if not specified)
     const m = measureText(this.text, this.font);
