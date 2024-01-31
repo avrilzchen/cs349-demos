@@ -43,9 +43,9 @@ redContainer.addEventListener(
   "action",
   (e) => {
     console.log("red action on capture");
-    return true; // return true to stop propagation
+    return false; // return true to stop propagation
   },
-  true // sets event type to capture
+  false // sets event type to capture
 );
 
 redContainer.addChild(orangeContainer);

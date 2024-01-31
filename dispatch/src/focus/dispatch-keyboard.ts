@@ -3,7 +3,7 @@ import {
   SKKeyboardEvent,
 } from "simplekit/imperative-mode";
 
-const debug = false;
+const debug = true;
 
 if (debug) console.log("load dispatch-keyboard module");
 
