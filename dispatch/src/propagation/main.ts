@@ -35,17 +35,17 @@ const yellowContainer = new SKContainer({
 yellowContainer.fill = "yellow";
 
 yellowContainer.addEventListener("action", (e) => {
-  console.log("yellow action on bubble");
-  return true; // return true to stop propagation
+  console.log("🟨 yellow action");
+  return false; // return true to stop propagation
 });
 
 redContainer.addEventListener(
   "action",
   (e) => {
-    console.log("red action on capture");
+    console.log("🟥 red action");
     return false; // return true to stop propagation
   },
-  false // sets event type to capture
+  true // sets event type to capture
 );
 
 redContainer.addChild(orangeContainer);
@@ -58,6 +58,7 @@ setSKDrawCallback((gc) => {
 
 setSKEventListener((e) => {
   if (e.type == "click") {
+    console.log("- - - - - - - - - - -");
     dispatch(e as SKMouseEvent, redContainer);
   }
 });
@@ -97,19 +98,20 @@ function dispatch(me: SKMouseEvent, root: SKElement) {
   const route = buildTargetRoute(me.x, me.y, root);
 
   // capture
-  const stopPropagation = !route.every((element) => {
+  const stopPropagation = route.some((element) => {
+    console.log(`capture ${element.toString()}`);
     const handled = element.handleMouseEventCapture(me);
-    console.log(`capture ${element.toString()}, handled: ${handled}`);
-    return !handled;
+    if (handled) console.log("stop propagation");
+    return handled;
   });
 
-  console.log(`stop propagation? ${stopPropagation}`);
   if (stopPropagation) return;
 
   // bubble
-  route.reverse().every((element) => {
+  route.reverse().some((element) => {
+    console.log(`bubble ${element.toString()}`);
     const handled = element.handleMouseEvent(me);
-    console.log(`bubble ${element.toString()}, handled: ${handled}`);
-    return !handled;
+    if (handled) console.log("stop propagation");
+    return handled;
   });
 }
