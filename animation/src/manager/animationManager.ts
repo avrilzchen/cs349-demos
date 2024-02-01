@@ -1,8 +1,8 @@
 import { skTime } from "simplekit/canvas-mode";
 // local import
-import { Animator } from "./animator";
-
-export * from "./animator";
+import { Animator } from "../easing/animator";
+// so Animator and animationManager are exported from the same file
+export * from "../easing/animator";
 
 class AnimationManager {
   protected animations: Animator[] = [];
