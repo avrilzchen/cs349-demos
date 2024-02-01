@@ -1,8 +1,12 @@
-import { startSimpleKit, setSKRoot } from "../../../simplekit";
-import { SKContainer } from "../../../simplekit/widget";
+import {
+  Settings,
+  SKContainer,
+  startSimpleKit,
+  setSKRoot,
+  Layout,
+} from "simplekit/imperative-mode";
 
-import * as Layout from "../../../simplekit/layout";
-import { random } from "../../../simplekit/utility";
+import { random } from "simplekit/utility";
 
 // helper function to make a container
 function makeContainer(id: string, fill: string): SKContainer {

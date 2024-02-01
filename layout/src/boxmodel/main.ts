@@ -6,12 +6,12 @@ import {
 } from "simplekit/imperative-mode";
 
 // global debug flag
-Settings.debug = false;
+// Settings.debug = false;
 
 const root = new SKContainer();
 root.id = "root";
 root.fill = "white";
-root.debug = false;
+// root.debug = false;
 root.box.padding = 10;
 console.log(`root: ${root.debug}`);
 
