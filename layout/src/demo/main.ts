@@ -1,12 +1,16 @@
-import { startSimpleKit, setSKRoot } from "../../../simplekit";
 import {
+  startSimpleKit,
+  setSKRoot,
   SKButton,
   SKContainer,
   SKLabel,
   SKTextfield,
-} from "../../../simplekit/widget";
+  Layout,
+  Settings,
+} from "simplekit/imperative-mode";
 
-import * as Layout from "../../../simplekit/layout";
+// global debug flag to visualize box model dimensions
+Settings.debug = true;
 
 const root = new SKContainer();
 root.box.padding = 10;
@@ -16,12 +20,10 @@ root.fill = "whitesmoke";
 setSKRoot(root);
 
 // fixed size panel in centre
-const panel = new SKContainer();
+const panel = new SKContainer({ width: 400, height: 150 });
 panel.fill = "white";
 panel.border = "black";
 panel.box.padding = 20;
-panel.width = 400;
-panel.height = 150;
 
 root.addChild(panel);
 root.layoutMethod = Layout.makeCentredLayout();
@@ -31,16 +33,18 @@ root.layoutMethod = Layout.makeCentredLayout();
 // panel.box.margin = 50;
 
 // label
-const label = new SKLabel("Name:");
-label.align = "right";
+const label = new SKLabel({
+  text: "Name:",
+  align: "right",
+  width: 80,
+});
 
 // texfield
-const name = new SKTextfield();
-name.width = 100;
+const name = new SKTextfield({ width: 150 });
 name.fillWidth = 1;
 
 // button
-const hello = new SKButton("Hello");
+const hello = new SKButton({ text: "Hello", width: 80 });
 
 // set an event handler for button "action" event
 hello.addEventListener("action", () => {

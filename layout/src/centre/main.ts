@@ -24,6 +24,8 @@ a.x = 50;
 a.y = 50;
 a.width = 100;
 a.height = 50;
+// a.fillWidth = 1;
+// a.fillHeight = 1;
 a.debug = true;
 
 root.addChild(a);
