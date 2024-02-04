@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "simplekit": "../simplekit"
+    "simplekit": "file:../simplekit"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
