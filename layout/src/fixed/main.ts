@@ -15,11 +15,11 @@ function makeContainer(id: string, fill: string): SKContainer {
 }
 
 const root = makeContainer("root", "lightyellow");
-root.box.padding = 10;
+root.padding = 10;
 // root.debug = true;
 
 const a = makeContainer("A", "lightblue");
-a.box.padding = 10;
+a.padding = 10;
 a.x = 50;
 a.y = 50;
 a.width = 100;
@@ -29,7 +29,7 @@ a.debug = true;
 root.addChild(a);
 
 const b = makeContainer("B", "pink");
-b.box.padding = 10;
+b.padding = 10;
 b.x = 200;
 b.y = 50;
 b.width = 50;

@@ -15,12 +15,12 @@ function makeContainer(id: string, fill: string): SKContainer {
 }
 
 const root = makeContainer("root", "lightyellow");
-root.box.padding = 10;
+root.padding = 10;
 // root.debug = true;
 
 const a = makeContainer("A", "lightblue");
-// a.box.margin = 20;
-a.box.padding = 10;
+// a.margin = 20;
+a.padding = 10;
 a.width = 100;
 a.height = 100;
 // a.fillWidth = 1;
@@ -29,8 +29,8 @@ a.debug = true;
 root.addChild(a);
 
 const b = makeContainer("B", "pink");
-// b.box.margin = 20;
-b.box.padding = 10;
+// b.margin = 20;
+b.padding = 10;
 b.width = 100;
 b.height = 100;
 b.fillWidth = 1;
@@ -39,8 +39,8 @@ b.debug = true;
 root.addChild(b);
 
 const c = makeContainer("C", "lightgreen");
-// c.box.margin = 20;
-c.box.padding = 10;
+// c.margin = 20;
+c.padding = 10;
 c.width = 100;
 c.height = 100;
 // c.fillWidth = 1;

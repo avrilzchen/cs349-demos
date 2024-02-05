@@ -10,27 +10,24 @@ import {
 } from "simplekit/imperative-mode";
 
 // global debug flag to visualize box model dimensions
-Settings.debug = true;
+// Settings.debug = true;
 
 const root = new SKContainer();
-root.box.padding = 10;
+root.padding = 10;
 root.fill = "whitesmoke";
-// root.debug = true;
-
-setSKRoot(root);
 
 // fixed size panel in centre
 const panel = new SKContainer({ width: 400, height: 150 });
 panel.fill = "white";
 panel.border = "black";
-panel.box.padding = 20;
+panel.padding = 20;
 
 root.addChild(panel);
 root.layoutMethod = Layout.makeCentredLayout();
 // try this too
 // root.layoutMethod = Layout.makeFillRowLayout();
 // panel.fillWidth = 1;
-// panel.box.margin = 50;
+// panel.margin = 50;
 
 // label
 const label = new SKLabel({
@@ -59,5 +56,7 @@ panel.addChild(name);
 panel.addChild(hello);
 
 panel.layoutMethod = Layout.makeFillRowLayout({ gap: 10 });
+
+setSKRoot(root);
 
 startSimpleKit();

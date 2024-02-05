@@ -17,13 +17,13 @@ function makeContainer(id: string, fill: string): SKContainer {
 }
 
 const root = makeContainer("root", "lightyellow");
-root.box.padding = 10;
+root.padding = 10;
 // root.debug = true;
 
 for (let i = 0; i < 10; i++) {
   const a = makeContainer(`${i + 1}`, "lightblue");
-  a.box.padding = 10;
-  a.box.margin = 10;
+  a.padding = 10;
+  a.margin = 10;
   a.x = 50;
   a.y = 50;
   a.width = random(50, 150);
