@@ -21,7 +21,7 @@ root.layoutMethod = Layout.makeFillRowLayout();
 
 // centred panel
 const panel = new SKContainer();
-panel.box.margin = 50;
+panel.margin = 50;
 panel.fillWidth = 1;
 panel.fillHeight = 1;
 // panel.debug = true;
@@ -33,7 +33,7 @@ const left = new SKContainer();
 left.id = "left";
 left.fill = "white";
 left.border = "grey";
-left.box.padding = 10;
+left.padding = 10;
 left.fillWidth = 1;
 left.fillHeight = 1;
 left.layoutMethod = Layout.makeCentredLayout();
@@ -43,7 +43,7 @@ const right = new SKContainer();
 right.id = "right";
 right.fill = "white";
 right.border = "grey";
-right.box.padding = 10;
+right.padding = 10;
 right.fillWidth = 1;
 right.fillHeight = 1;
 right.layoutMethod = Layout.makeWrapRowLayout({ gap: 10 });
@@ -69,7 +69,7 @@ function visualizeCounter() {
   for (let i = 0; i < counter; i++) {
     const label = new SKLabel({ text: `${i + 1}` });
     label.fill = "pink";
-    label.box.padding = 10;
+    label.padding = 15;
     right.addChild(label);
   }
 }

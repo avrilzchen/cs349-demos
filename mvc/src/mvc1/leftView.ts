@@ -27,7 +27,7 @@ export class LeftView extends SKContainer implements Observer {
     this.id = "left";
     this.fill = "white";
     this.border = "grey";
-    this.box.padding = 10;
+    this.padding = 10;
     this.fillWidth = 1;
     this.fillHeight = 1;
     this.layoutMethod = Layout.makeCentredLayout();

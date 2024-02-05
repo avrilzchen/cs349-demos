@@ -23,7 +23,7 @@ root.layoutMethod = Layout.makeFillRowLayout();
 
 // centred panel
 const panel = new SKContainer();
-panel.box.margin = 50;
+panel.margin = 50;
 panel.fillWidth = 1;
 panel.fillHeight = 1;
 

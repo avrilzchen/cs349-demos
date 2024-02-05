@@ -17,7 +17,7 @@ export class RightView extends SKContainer implements Observer {
     for (let i = 0; i < this.model.count; i++) {
       const label = new SKLabel({ text: `${i + 1}` });
       label.fill = "lightgreen";
-      label.box.padding = 10;
+      label.padding = 15;
       this.addChild(label);
     }
   }
@@ -31,7 +31,7 @@ export class RightView extends SKContainer implements Observer {
     this.id = "right";
     this.fill = "white";
     this.border = "grey";
-    this.box.padding = 10;
+    this.padding = 10;
     this.fillWidth = 1;
     this.fillHeight = 1;
     this.layoutMethod = Layout.makeWrapRowLayout({ gap: 10 });
