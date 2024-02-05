@@ -15,7 +15,7 @@ root.fill = "white";
 root.padding = 10;
 console.log(`root: ${root.debug}`);
 
-const a = new SKContainer({ x: 30, y: 30, width: 0, height: 75 });
+const a = new SKContainer({ x: 30, y: 30, width: 125, height: 75 });
 a.margin = 20;
 a.padding = 10;
 // a.border = "1px solid black";
