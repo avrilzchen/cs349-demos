@@ -36,7 +36,7 @@ export function stackColLayout(
     }
 
     // next row
-    y += +el.heightLayout;
+    y += el.heightLayout;
 
     // update bounds that were actually used
     newBounds.width = Math.max(newBounds.width, el.widthLayout);

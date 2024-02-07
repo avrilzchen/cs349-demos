@@ -27,7 +27,7 @@ export class TodoView extends SKContainer implements Observer {
   selectButton = new SKButton({ text: " ", width: 18 });
   delButton = new SKButton({ text: "X", width: 18 });
 
-  constructor(private model: Model, public todoId: number) {
+  constructor(private model: Model, protected todoId: number) {
     super();
 
     // view design
