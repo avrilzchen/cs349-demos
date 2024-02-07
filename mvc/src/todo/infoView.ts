@@ -18,7 +18,12 @@ export class InfoView extends SKContainer implements Observer {
     } else if (this.model.selectId !== null) {
       this.message.text = `edit id#${this.model.selectId}`;
     } else {
-      this.message.text = `${num} todo${num > 1 ? "s" : ""}`;
+      let text = `${num} todo${num > 1 ? "s" : ""}`;
+      if (this.model.numDone > 0) {
+        text += ` (${this.model.numDone} done)`;
+      }
+
+      this.message.text = text;
     }
   }
 
