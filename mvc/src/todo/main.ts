@@ -12,7 +12,6 @@ import { FormView } from "./formView";
 import { ListView } from "./listView";
 import { makeStackColLayout } from "./stackCol";
 import { InfoView } from "./infoView";
-import { SKCheckbox } from "./checkbox";
 
 // data
 const model = new Model();
@@ -35,10 +34,6 @@ left.addChild(new ListView(model));
 // add views to root (will be left and right areas)
 root.addChild(left);
 root.addChild(new InfoView(model));
-
-// const checkbox = new SKCheckbox();
-// checkbox.margin = 10;
-// root.addChild(checkbox);
 
 setSKRoot(root);
 
