@@ -1,0 +1,27 @@
+/* mobile devices under 600px */
+
+body {
+  padding: 10px;
+}
+
+div#main {
+  display: flex;
+  flex-flow: column;
+  gap: 30px;
+}
+
+div#main > div {
+  flex: 1;
+}
+
+/* tablet and desktop devices over 600px */
+
+@media only screen and (min-width: 600px) {
+  body {
+    padding: 50px;
+  }
+
+  div#main {
+    flex-flow: row;
+  }
+}

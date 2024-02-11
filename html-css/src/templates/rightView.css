@@ -1,0 +1,20 @@
+/* styles for RightView */
+
+div#right {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: white;
+  flex: 1 1 0;
+  flex-flow: row wrap;
+  display: flex;
+  align-content: flex-start;
+  overflow: scroll;
+}
+
+/* the blue number squares */
+div#right > div {
+  margin: 5px;
+  padding: 10px;
+  background-color: lightblue;
+  flex: 0 0 auto;
+}

@@ -1,0 +1,16 @@
+/* styles for LeftView */
+
+div#left {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: white;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div#left > button {
+  min-width: 80px;
+}
+

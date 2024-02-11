@@ -1,0 +1,67 @@
+:root {
+  background-color: whitesmoke;
+  --heading-colour: rgb(33 35 44);
+  --body-colour: rgb(77, 77, 77);
+  --other-colour: rgb(147, 147, 147);
+
+  font-family: "Heebo", sans-serif;
+
+  --font-ratio: 1.4;
+  --font-p: 1em;
+  --font-h5: calc(var(--font-p));
+  --font-h4: calc(var(--font-h5) * var(--font-ratio));
+  --font-h3: calc(var(--font-h4) * var(--font-ratio));
+  --font-h2: calc(var(--font-h3) * var(--font-ratio));
+  --font-h1: calc(var(--font-h2) * var(--font-ratio));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+  color: var(--heading-colour);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--font-h1);
+  margin-top: calc(var(--font-h1) * 0.25);
+}
+
+h2 {
+  font-size: var(--font-h2);
+  margin-top: calc(var(--font-h2) * 0.25);
+}
+
+h3 {
+  font-size: var(--font-h3);
+  margin-top: calc(var(--font-h3) * 0.25);
+}
+
+h4 {
+  font-size: var(--font-h4);
+  margin-top: calc(var(--font-h4) * 0.5);
+}
+
+h5 {
+  font-size: var(--font-h5);
+  margin-top: calc(var(--font-h5) * 0.5);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: var(--font-p);
+  color: var(--body-colour);
+  line-height: 1.5;
+}
+
+p.other {
+  font-weight: 300;
+  font-size: calc(var(--font-p) * 0.8);
+  color: var(--other-colour);
+  line-height: 1.3;
+}

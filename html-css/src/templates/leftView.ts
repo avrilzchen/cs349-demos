@@ -1,8 +1,13 @@
-// local imports
-import { Observer } from "./observer";
-import { Model } from "./model";
+// to do some checks on html strings
+import html from "html-template-tag";
 
-export class LeftView implements Observer {
+// local imports
+import { Model } from "./model";
+import View from "./view";
+
+import "./leftView.css";
+
+export class LeftView implements View {
   //#region observer pattern
 
   update(): void {
@@ -11,29 +16,32 @@ export class LeftView implements Observer {
 
   //#endregion
 
-  button: HTMLButtonElement;
+  // the HTML container for this view
+  private container: HTMLDivElement;
+  get root(): HTMLDivElement {
+    return this.container;
+  }
 
-  constructor(parent: HTMLElement, private model: Model) {
-    // create the view from a template
-    const template = document.getElementById(
-      "left-view"
-    ) as HTMLTemplateElement;
-    if (!template) throw new Error("leftView template not found");
+  private button: HTMLButtonElement;
 
-    // clone the template to create a new view
-    const view = template.content.cloneNode(true) as DocumentFragment;
+  constructor(private model: Model) {
+    // create view container using a <template> and HTML tagged template
+    var temp = document.createElement("template");
+    temp.innerHTML = html`
+      <div id="left">
+        <button id="increment">?</button>
+      </div>
+    `;
+    this.container = temp.content.firstElementChild as HTMLDivElement;
 
-    // important to do this before inserting into the DOM
-    const el = view.querySelector(
+    // get reference to button using querySelector
+    const el = this.container.querySelector(
       "button#increment"
     ) as HTMLButtonElement;
     if (!el) throw new Error("leftView button not found");
     this.button = el;
 
-    // insert view into the parent
-    parent.appendChild(view);
-
-    // // this is the Controller
+    // setup the controller
     this.button.addEventListener("click", () => {
       model.increment();
     });

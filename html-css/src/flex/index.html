@@ -8,11 +8,10 @@
     />
     <title>flex</title>
     <style>
-      /* usual reset */
-      body,
-      html {
+      /* reset */
+      body {
         margin: 0;
-        padding: 0;
+        padding: 40px;
       }
 
       /* use alternative box model */
@@ -20,6 +19,7 @@
         box-sizing: border-box;
       }
 
+      /* flex container */
       div#main {
         padding: 10px;
         height: 150px;
@@ -29,6 +29,7 @@
         align-items: center;
       }
 
+      /* flex items */
       div#main > div {
         background-color: deepskyblue;
         padding: 20px;
@@ -39,7 +40,8 @@
         /* flex: 1 1 auto; */
       }
 
-      /* div#main > div#b {
+      /* special flex item /*
+      /*div#main > div#b {
         background-color: orangered;
         flex-shrink: 0;
         align-self: stretch;

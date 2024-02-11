@@ -1,0 +1,50 @@
+/* 
+CSS variables for colours
+Note different ways of defining colours
+*/
+
+:root {
+  --primary1: #5e00ff;
+  --primary2: rgb(33 35 44);
+  --primary3: white;
+  --primary4: lightgrey;
+
+  --secondary1: hsl(353 55% 50%);
+  --secondary2: #e6bd19;
+}
+
+h1 {
+  color: var(--primary1);
+}
+
+button {
+  background-color: var(--primary4);
+  color: var(--primary2);
+  min-width: 80px;
+}
+
+button.primary {
+  background-color: var(--primary1);
+  color: var(--primary3);
+}
+
+/* danger div */
+
+div.danger {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--secondary1);
+  border-left: 10px solid var(--secondary1);
+  color: var(--secondary1);
+}
+
+div.danger > p {
+  margin: 0;
+}
+
+div.danger > button {
+  margin-top: 10px;
+  background-color: var(--secondary1);
+  color: var(--primary3);
+}
