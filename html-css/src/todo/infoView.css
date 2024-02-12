@@ -1,7 +1,7 @@
 /* styles for RightView */
 
 div#info {
-  background-color: whitesmoke;
+  background-color: lightgray;
   width: 150px;
   display: flex;
   align-items: center;
