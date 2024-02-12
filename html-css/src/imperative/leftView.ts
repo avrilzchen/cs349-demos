@@ -30,6 +30,8 @@ export class LeftView implements View {
 
     // button with controller
     this.button = document.createElement("button");
+    // impossible state to catch errors
+    this.button.innerText = "?";
     this.button.addEventListener("click", () => {
       model.increment();
     });

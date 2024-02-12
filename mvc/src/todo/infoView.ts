@@ -11,7 +11,7 @@ import { Model } from "./model";
 export class InfoView extends SKContainer implements Observer {
   //#region observer pattern
 
-  update(): void {
+  update() {
     const num = this.model.num;
     if (num === 0) {
       this.message.text = "no todos!";

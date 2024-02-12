@@ -25,7 +25,7 @@ export class TodoView extends SKContainer implements Observer {
   checkbox = new SKCheckbox();
   todoText = new SKLabel({ text: "?" });
   selectButton = new SKButton({ text: " ", width: 18 });
-  delButton = new SKButton({ text: "X", width: 18 });
+  deleteButton = new SKButton({ text: "X", width: 18 });
 
   constructor(private model: Model, protected todoId: number) {
     super();
@@ -43,7 +43,7 @@ export class TodoView extends SKContainer implements Observer {
     this.checkbox.margin = 3;
     this.addChild(this.todoText);
     this.addChild(this.selectButton);
-    this.addChild(this.delButton);
+    this.addChild(this.deleteButton);
     this.todoText.fillWidth = 1;
     this.todoText.align = "left";
 
@@ -51,7 +51,7 @@ export class TodoView extends SKContainer implements Observer {
     this.checkbox.addEventListener("action", () => {
       model.update(todoId, { done: this.checkbox.checked });
     });
-    this.delButton.addEventListener("action", () => {
+    this.deleteButton.addEventListener("action", () => {
       model.delete(todoId);
     });
     this.selectButton.addEventListener("action", () => {

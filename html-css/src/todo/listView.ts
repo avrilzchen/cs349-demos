@@ -1,23 +1,24 @@
 // local imports
 import View from "./view";
 import { Model } from "./model";
+import { TodoView } from "./todoView";
 
-import "./rightView.css";
+import "./listView.css";
 
-export class RightView implements View {
+export class ListView implements View {
   //#region observer pattern
 
   update(): void {
-    // just re-build all children each update
+    // Simplest thing to do is clear all children and build todo
+    // list each time model updates. If performance becomes an issue,
+    // then add code to keep undos with matching ids, etc.
 
     // remove all current children
     this.container.replaceChildren();
 
-    // create all children to match the model
-    [...Array(this.model.count).keys()].forEach((i) => {
-      const div = document.createElement("div");
-      div.innerText = `${i + 1}`;
-      this.container.appendChild(div);
+    // go through list of Todos, create a View for each
+    this.model.all().forEach((t) => {
+      this.container.appendChild(new TodoView(this.model, t.id).root);
     });
   }
 
@@ -32,9 +33,7 @@ export class RightView implements View {
   constructor(private model: Model) {
     // setup the view root container
     this.container = document.createElement("div");
-    this.container.id = "right";
-    // impossible state to catch errors
-    this.container.innerText = "???";
+    this.container.id = "list";
 
     // no widgets to setup, they're all created in updates
 

@@ -1,8 +1,4 @@
-import {
-  SKContainer,
-  SKLabel,
-  Layout,
-} from "simplekit/imperative-mode";
+import { SKContainer } from "simplekit/imperative-mode";
 
 // local imports
 import { Observer } from "./observer";
@@ -17,6 +13,8 @@ export class ListView extends SKContainer implements Observer {
     // Simplest thing to do is clear all children and build todo
     // list each time model updates. If performance becomes an issue,
     // then add code to keep undos with matching ids, etc.
+
+    // remove all current children
     this.clearChildren();
 
     // go through list of Todos, create a View for each
@@ -39,6 +37,8 @@ export class ListView extends SKContainer implements Observer {
 
     // use a custom layout in this app
     this.layoutMethod = makeStackColLayout();
+
+    // no widgets to setup, they're all created in updates
 
     // register with the model when we're ready
     this.model.addObserver(this);

@@ -23,6 +23,7 @@ const root = new SKContainer();
 root.id = "root";
 root.layoutMethod = Layout.makeFillRowLayout();
 
+// create container to hold left-side views
 const left = new SKContainer();
 left.fillWidth = 1;
 left.layoutMethod = makeStackColLayout();
