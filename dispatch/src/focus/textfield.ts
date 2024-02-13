@@ -9,6 +9,10 @@ import { requestKeyboardFocus } from "./dispatch-keyboard";
 export class SKTextfieldDemo extends SKTextfield {
   constructor(props: SKTextfieldProps) {
     super(props);
+
+    // force layout recalculation for this demo
+    this.calculateBasis();
+    this.doLayout();
   }
 
   handleMouseEvent(me: SKMouseEvent) {
