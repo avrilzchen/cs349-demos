@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>validation1</title>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" pattern="[a-zA-Z ]+" required />
+      </div>
+
+      <div>
+        <label for="age">Age</label>
+        <input id="age" type="number" min="18" max="99" />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" required />
+      </div>
+      <div><button>Submit</button></div>
+    </form>
+
+    <script type="module" src="main.ts"></script>
+  </body>
+</html>

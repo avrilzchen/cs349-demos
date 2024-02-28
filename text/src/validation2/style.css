@@ -1,0 +1,21 @@
+form > div {
+  margin: 10px;
+}
+
+/* add a red asterisk to required fields */
+div:has(input:required)::after {
+  content: "*";
+  color: red;
+  padding-left: 0px;
+}
+
+/* hide the error message by default */
+p.error {
+  display: none;
+}
+
+/* add active class to show error message */
+p.error.active {
+  display: block;
+  color: red;
+}

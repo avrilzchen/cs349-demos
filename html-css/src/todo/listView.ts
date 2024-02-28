@@ -6,6 +6,9 @@ import { TodoView } from "./todoView";
 import "./listView.css";
 import { Observer } from "./observer";
 
+const e = document.createElement("caanvas") as HTMLCanvasElement;
+console.log(e);
+
 export class ListView implements View {
   //#region observer pattern
 

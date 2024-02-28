@@ -1,0 +1,23 @@
+form > div {
+  margin: 10px;
+}
+
+input:valid {
+  border: 2px solid black;
+}
+
+input:invalid {
+  border: 2px solid red;
+}
+
+/* input:required {
+  border: 2px dashed darkred;
+} */
+
+/* add a red asterisk to required fields */
+div:has(input:required)::after {
+  content: "*";
+  color: red;
+  padding-left: 0px;
+  vertical-align: top;
+}
