@@ -4,6 +4,7 @@ import { Model } from "./model";
 import { TodoView } from "./todoView";
 
 import "./listView.css";
+import { Observer } from "./observer";
 
 export class ListView implements View {
   //#region observer pattern
@@ -12,6 +13,8 @@ export class ListView implements View {
     // Simplest thing to do is clear all children and build todo
     // list each time model updates. If performance becomes an issue,
     // then add code to keep undos with matching ids, etc.
+
+    // TODO should remove all child observers from model to avoid memory leak
 
     // remove all current children
     this.container.replaceChildren();
