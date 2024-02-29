@@ -23,6 +23,8 @@ const translations = {
   },
 } as I18nTranslationTable;
 
+const defaultLocal = "en-CA";
+
 // set locale of all elements with data-i18n attribute
 function setLocale(locale: string) {
   // good practice to update the page language type as well
@@ -38,17 +40,23 @@ function setLocale(locale: string) {
 // get default browser locale
 // (not the same as lang="en" in html)
 const browserLocale = navigator.language;
-console.log(browserLocale);
 
-// initialize locale to browser locale
-setLocale(browserLocale);
+// initialize locale to browser locale (if possible)
+try {
+  setLocale(browserLocale);
+} catch (_) {
+  console.warn(
+    `No translation for '${browserLocale}', using '${defaultLocal}'`
+  );
+  setLocale(defaultLocal);
+}
 
 // setup the locale switcher
 const localSwitcher = document.querySelector(
   "[data-i18n-switcher]"
 ) as HTMLSelectElement;
 
-localSwitcher.addEventListener("change", (e) => {
+localSwitcher.addEventListener("change", (_) => {
   console.log(localSwitcher.value);
   setLocale(localSwitcher.value);
 });
