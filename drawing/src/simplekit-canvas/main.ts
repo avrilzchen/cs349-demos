@@ -13,7 +13,7 @@ setSKDrawCallback((gc) => {
   // pathHouseDemo(gc);
   // textDemo(gc);
   // colourDemo(gc);
-  // saveStateDemo(gc);
+  saveStateDemo(gc);
   // fpsDemo(gc);
 });
 

@@ -6,8 +6,8 @@ setSKDrawCallback((gc) => {
   gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
 
   // demos
-  squareDemo(gc);
-  // paintersDemo(gc);
+  // squareDemo(gc);
+  paintersDemo(gc);
   // displayListDemo(gc);
 });
 

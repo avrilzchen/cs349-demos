@@ -46,8 +46,8 @@ setSKDrawCallback((gc) => {
 
 // set the animation callback
 setSKAnimationCallback((time) => {
-  bounce();
-  // circle(time);
+  // bounce();
+  circle(time);
 });
 
 startSimpleKit();

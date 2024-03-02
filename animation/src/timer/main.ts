@@ -26,8 +26,8 @@ dot.x = 100;
 dot.y = 100;
 
 // choose a demo to run
-// simpleTimerDemo();
-callbackTimerDemo();
+simpleTimerDemo();
+// callbackTimerDemo();
 
 startSimpleKit();
 

@@ -2,6 +2,7 @@ import {
   startSimpleKit,
   setSKDrawCallback,
   setSKAnimationCallback,
+  
   skTime,
 } from "simplekit/canvas-mode";
 
@@ -56,7 +57,7 @@ const animateDotX = new Animator(
     dot.x = value;
     graph.add(value);
   },
-  easeIn
+  easeInOut
 );
 
 animateDotX.start(0);
