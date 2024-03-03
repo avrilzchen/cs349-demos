@@ -25,12 +25,12 @@ export class Model extends Subject {
     this.notifyObservers();
   }
 
-  canUndo() {
-    return this.undoManager.canUndo();
+  get canUndo() {
+    return this.undoManager.canUndo;
   }
 
-  canRedo() {
-    return this.undoManager.canRedo();
+  get canRedo() {
+    return this.undoManager.canRedo;
   }
 
   //#endregion
@@ -51,12 +51,20 @@ export class Model extends Subject {
 
   // Create
   create(task: string) {
+    // generate unique id once, use it in do and to create the todo
+    // (you don't want uniqueId to change between do and undo)
+    const id = uniqueId++;
     // undo add command
+    this.undoManager.execute({
+      do: () => {
+        this.todos = [...this.todos, { id, text: task, done: false }];
+      },
+      undo: () => {
+        this.todos = this.todos.slice(0, -1);
+      },
+    } as Command);
 
-    this.todos = [
-      ...this.todos,
-      { id: uniqueId++, text: task, done: false },
-    ];
+    this.todos = [...this.todos, { id, text: task, done: false }];
     this.notifyObservers();
   }
 
@@ -73,7 +81,23 @@ export class Model extends Subject {
 
   // Update
   update(id: number, todo: { text?: string; done?: boolean }) {
+    // for undo, capture the todo before the edit
+    const originalTodo = this.todos.find((t) => t.id === id);
+    if (!originalTodo) return;
+
     // undo update command
+    this.undoManager.execute({
+      do: () => {
+        this.todos = this.todos.map((t) =>
+          t.id === id ? { ...t, ...todo } : t
+        );
+      },
+      undo: () => {
+        this.todos = this.todos.map((t) =>
+          t.id === id ? originalTodo : t
+        );
+      },
+    } as Command);
 
     this.todos = this.todos.map((t) =>
       // if todo matches id, then spread it and replace
@@ -90,7 +114,7 @@ export class Model extends Subject {
     return this._selectId;
   }
   select(id: number) {
-    // no undo for selecting a todo
+    // no undo for selecting, it's a UI only action
 
     this._selectId = id;
     this.notifyObservers();
@@ -98,7 +122,24 @@ export class Model extends Subject {
 
   // Delete
   delete(id: number) {
-    // undo delete command
+    // for undo, capture the todo being deleted and its index
+    const deletedTodo = this.todos.find((t) => t.id === id);
+    if (!deletedTodo) return;
+    const deletedTodoIndex = this.todos.findIndex((t) => t.id === id);
+
+    this.undoManager.execute({
+      do: () => {
+        this.todos = this.todos.filter((t) => t.id !== id);
+      },
+      undo: () => {
+        // need to insert deleted todo at its original index
+        this.todos = [
+          ...this.todos.slice(0, deletedTodoIndex),
+          deletedTodo,
+          ...this.todos.slice(deletedTodoIndex),
+        ];
+      },
+    } as Command);
 
     this.todos = this.todos.filter((t) => t.id !== id);
     // edge case if editing a todo that is deleted
