@@ -16,12 +16,12 @@ export class Model extends Subject {
     this.notifyObservers();
   }
 
-  canUndo() {
-    return this.undoManager.canUndo();
+  get canUndo() {
+    return this.undoManager.canUndo;
   }
 
-  canRedo() {
-    return this.undoManager.canRedo();
+  get canRedo() {
+    return this.undoManager.canRedo;
   }
 
   //#endregion
@@ -43,7 +43,7 @@ export class Model extends Subject {
     } as Command);
 
     this._count = newValue;
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
   get count() {
@@ -63,7 +63,7 @@ export class Model extends Subject {
     } as Command);
 
     this._count++;
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 
@@ -79,7 +79,7 @@ export class Model extends Subject {
     } as Command);
 
     this._count--;
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 

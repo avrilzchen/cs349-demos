@@ -16,12 +16,12 @@ export class Model extends Subject {
     this.notifyObservers();
   }
 
-  canUndo() {
-    return this.undoManager.canUndo();
+  get canUndo() {
+    return this.undoManager.canUndo;
   }
 
-  canRedo() {
-    return this.undoManager.canRedo();
+  get canRedo() {
+    return this.undoManager.canRedo;
   }
 
   //#endregion
@@ -44,7 +44,7 @@ export class Model extends Subject {
     this.undoManager.execute({
       do: (state: number) => newValue,
     } as Command);
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
   get count() {
@@ -58,7 +58,7 @@ export class Model extends Subject {
       do: (state: number) => state + 1,
     } as Command);
 
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 
@@ -68,7 +68,7 @@ export class Model extends Subject {
       do: (state: number) => state - 1,
     } as Command);
 
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 

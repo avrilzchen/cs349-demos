@@ -6,8 +6,8 @@ export class ToolbarView implements View {
   //#region observer pattern
 
   update(): void {
-    this.undoButton.disabled = !this.model.canUndo();
-    this.redoButton.disabled = !this.model.canRedo();
+    this.undoButton.disabled = !this.model.canUndo;
+    this.redoButton.disabled = !this.model.canRedo;
   }
 
   //#endregion

@@ -10,7 +10,7 @@ export class Model extends Subject {
   // model "business logic"
   increment() {
     this._count++;
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 }
