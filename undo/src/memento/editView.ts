@@ -87,6 +87,16 @@ export class EditView implements View {
       model.count = parseInt(this.numberInput.value);
     });
 
+    // setup reset button
+    const resetButton =
+      (this.container.querySelector(
+        "div#edit>button[name=reset]"
+      ) as HTMLButtonElement) ||
+      throwError("div#edit>button[name=reset] not found");
+    resetButton.addEventListener("click", () => {
+      model.reset();
+    });
+
     // special view handler for range input
     // "input" event fired when user moves the slider
     // this.rangeInput.addEventListener("input", () => {

@@ -4,26 +4,24 @@ import { Memento, UndoManager } from "./undo";
 export class Model extends Subject {
   //#region undo manager
 
-  private undoManager = new UndoManager();
+  private undoManager;
 
   undo() {
-    const x = this.undoManager.undo();
-    console.log(x);
-    this._count = x || this._count;
+    this._count = this.undoManager.undo();
     this.notifyObservers();
   }
 
   redo() {
-    this._count = this.undoManager.redo() || this._count;
+    this._count = this.undoManager.redo();
     this.notifyObservers();
   }
 
-  canUndo() {
-    return this.undoManager.canUndo();
+  get canUndo() {
+    return this.undoManager.canUndo;
   }
 
-  canRedo() {
-    return this.undoManager.canRedo();
+  get canRedo() {
+    return this.undoManager.canRedo;
   }
 
   //#endregion
@@ -31,14 +29,16 @@ export class Model extends Subject {
   constructor() {
     super();
 
-    // save the base memento
-    this.undoManager.execute({
+    // create UndoManager with a memento for base state
+    this.undoManager = new UndoManager({
       state: this._count,
     } as Memento);
   }
 
+  readonly startCount = 49;
+
   // model data (i.e. model state)
-  private _count = 49;
+  private _count = this.startCount;
   set count(newValue: number) {
     this._count = newValue;
 
@@ -47,7 +47,7 @@ export class Model extends Subject {
       state: this._count,
     } as Memento);
 
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
   get count() {
@@ -63,7 +63,7 @@ export class Model extends Subject {
       state: this._count,
     } as Memento);
 
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
   }
 
@@ -75,7 +75,11 @@ export class Model extends Subject {
       state: this._count,
     } as Memento);
 
-    // need to notify observers anytime the model changes
+    // need to notify observers any time the model changes
     this.notifyObservers();
+  }
+
+  reset() {
+    this.count = this.startCount;
   }
 }
