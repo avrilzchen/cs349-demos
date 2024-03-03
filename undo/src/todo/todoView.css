@@ -1,0 +1,22 @@
+div.todo {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+div.todo > span {
+  flex: 1;
+}
+
+/* 
+:checked is a pseudo class  
++ is "next sibling" selector 
+the rule means: when checkbox is checked, render the 
+text in the span next to it with a line-through it 
+*/
+input:checked + span {
+  text-decoration: line-through;
+}
