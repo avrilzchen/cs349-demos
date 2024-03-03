@@ -1,0 +1,10 @@
+div#undo-bar {
+  background-color: lightgrey;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+
+  div#form > button {
+    width: 60px;
+  }
+}
