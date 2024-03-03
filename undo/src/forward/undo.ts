@@ -43,11 +43,11 @@ export class UndoManager {
     console.log(this.toString());
   }
 
-  canUndo() {
+  get canUndo() {
     return this.undoStack.length > 0;
   }
 
-  canRedo() {
+  get canRedo() {
     return this.redoStack.length > 0;
   }
 
