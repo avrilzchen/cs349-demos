@@ -1,0 +1,49 @@
+import { Model } from "./model";
+
+export interface Command {
+  redo(): void;
+  undo(): void;
+}
+
+export class UndoManager {
+  private undoStack: Command[] = [];
+  private redoStack: Command[] = [];
+
+  constructor() {}
+
+  execute(command: Command) {
+    this.undoStack.push(command);
+    this.redoStack = [];
+    console.log(this.toString());
+  }
+
+  undo() {
+    const command = this.undoStack.pop();
+    if (command) {
+      this.redoStack.push(command);
+      command.undo();
+    }
+    console.log(this.toString());
+  }
+
+  redo() {
+    const command = this.redoStack.pop();
+    if (command) {
+      this.undoStack.push(command);
+      command.redo();
+    }
+    console.log(this.toString());
+  }
+
+  canUndo() {
+    return this.undoStack.length > 0;
+  }
+
+  canRedo() {
+    return this.redoStack.length > 0;
+  }
+
+  toString() {
+    return `undoStack: ${this.undoStack.length}, redoStack: ${this.redoStack.length}`;
+  }
+}
