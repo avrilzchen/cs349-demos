@@ -7,7 +7,10 @@ import "./undoBarView.css";
 export class UndoBarView implements View {
   //#region observer pattern
 
-  update(): void {}
+  update(): void {
+    this.undoButton.disabled = !this.model.canUndo;
+    this.redoButton.disabled = !this.model.canRedo;
+  }
 
   //#endregion
 
@@ -31,14 +34,18 @@ export class UndoBarView implements View {
     this.undoButton = document.createElement("button");
     this.undoButton.innerText = "Undo";
     // create controller
-    this.undoButton.addEventListener("click", () => {});
+    this.undoButton.addEventListener("click", () => {
+      model.undo();
+    });
     this.container.appendChild(this.undoButton);
 
     // button with controller
     this.redoButton = document.createElement("button");
     this.redoButton.innerText = "Redo";
     // create controller
-    this.redoButton.addEventListener("click", () => {});
+    this.redoButton.addEventListener("click", () => {
+      model.redo();
+    });
     this.container.appendChild(this.redoButton);
 
     // register with the model
