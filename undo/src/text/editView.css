@@ -1,0 +1,8 @@
+div#edit {
+  display: flex;
+
+  textarea {
+    flex: 1;
+    height: 100px;
+  }
+}

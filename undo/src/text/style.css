@@ -1,0 +1,15 @@
+/* usual reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* use alternative box model */
+div {
+  box-sizing: border-box;
+}
+
+div#app > div {
+  padding: 10px;
+}
