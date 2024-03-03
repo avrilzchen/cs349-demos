@@ -30,9 +30,9 @@ export class Model extends Subject {
     super();
 
     // create UndoManager with a memento for base state
-    this.undoManager = new UndoManager({
+    this.undoManager = new UndoManager<number>({
       state: this._count,
-    } as Memento);
+    } as Memento<number>);
   }
 
   readonly startCount = 49;
@@ -45,7 +45,7 @@ export class Model extends Subject {
     // add memento to undo stack
     this.undoManager.execute({
       state: this._count,
-    } as Memento);
+    } as Memento<number>);
 
     // need to notify observers any time the model changes
     this.notifyObservers();
@@ -61,7 +61,7 @@ export class Model extends Subject {
     // add memento to undo stack
     this.undoManager.execute({
       state: this._count,
-    } as Memento);
+    } as Memento<number>);
 
     // need to notify observers any time the model changes
     this.notifyObservers();
@@ -73,7 +73,7 @@ export class Model extends Subject {
     // add memento to undo stack
     this.undoManager.execute({
       state: this._count,
-    } as Memento);
+    } as Memento<number>);
 
     // need to notify observers any time the model changes
     this.notifyObservers();

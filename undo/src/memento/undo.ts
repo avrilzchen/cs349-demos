@@ -1,21 +1,21 @@
-export interface Memento {
-  state: number;
+export interface Memento<State> {
+  state: State;
 }
 
-export class UndoManager {
-  private undoStack: Memento[] = [];
-  private redoStack: Memento[] = [];
+export class UndoManager<State> {
+  private undoStack: Memento<State>[] = [];
+  private redoStack: Memento<State>[] = [];
 
   // memento must have a base state
-  constructor(private base: Memento) {}
+  constructor(private base: Memento<State>) {}
 
-  execute(command: Memento) {
+  execute(command: Memento<State>) {
     this.undoStack.push(command);
     this.redoStack = [];
     console.log(this.toString());
   }
 
-  undo(): number {
+  undo(): State {
     console.log("undo", this.toString());
 
     // top of undo stack is the current state
@@ -30,7 +30,7 @@ export class UndoManager {
     return prevMemento.state;
   }
 
-  redo(): number {
+  redo(): State {
     console.log("redo", this.toString());
 
     // top of redo stack is the next state
