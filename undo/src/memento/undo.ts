@@ -9,8 +9,8 @@ export class UndoManager<State> {
   // memento must have a base state
   constructor(private base: Memento<State>) {}
 
-  execute(command: Memento<State>) {
-    this.undoStack.push(command);
+  execute(memento: Memento<State>) {
+    this.undoStack.push(memento);
     this.redoStack = [];
     console.log(this.toString());
   }

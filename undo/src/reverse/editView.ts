@@ -96,11 +96,11 @@ export class EditView implements View {
       model.reset();
     });
 
-    // special view handler for range input
+    // uncomment to see poor undo granularity
     // "input" event fired when user moves the slider
-    // this.rangeInput.addEventListener("input", () => {
-    //   this.numberInput.value = this.rangeInput.value;
-    // });
+    this.rangeInput.addEventListener("input", () => {
+      model.count = parseInt(this.rangeInput.value);
+    });
 
     // register with the model
     this.model.addObserver(this);
