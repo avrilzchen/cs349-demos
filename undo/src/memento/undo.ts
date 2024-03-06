@@ -1,7 +1,8 @@
+// using generic type for state
 export interface Memento<State> {
   state: State;
 }
-
+// using generic type for state
 export class UndoManager<State> {
   private undoStack: Memento<State>[] = [];
   private redoStack: Memento<State>[] = [];
