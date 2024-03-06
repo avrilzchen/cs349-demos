@@ -1,7 +1,5 @@
 export {};
 
-console.log("fetch");
-
 function setup() {
   const results = document.querySelector(
     "#results"
@@ -13,39 +11,79 @@ function setup() {
   ) as HTMLSelectElement;
   if (!select) return;
 
-  const spinner = document.querySelector(
-    "#spinner"
-  ) as HTMLDivElement;
+  // optional loading animation
+  const loader = document.querySelector("#loader") as HTMLDivElement;
+  if (loader) loader.style.display = "none";
 
-  if (spinner) spinner.style.display = "none";
+  /**
+   * Using Fetch API with "thenable" promises
+   * @param url
+   */
+  async function doFetch1(url: string) {
+    results.innerText = "Fetching ...";
+    console.log("📦 Fetch1 START");
+    if (loader) loader.style.display = "flex";
 
-  // fetch is an asynchronous function that returns a promise
-  async function doFetch(url: string) {
-    results.innerText = "Fetching...";
-    if (spinner) spinner.style.display = "flex";
-    // the fetch call
+    // fetch is an asynchronous function that
+    // returns a "response promise"
     fetch(url)
-      .then(
-        (response) => response.json(), // success
-        (reason) => {
-          console.error(reason); // error
-        }
-      )
-      .then(
-        (data) => (results.innerText = JSON.stringify(data, null, 2))
-      )
-      .then(() =>
-        spinner ? (spinner.style.display = "none") : null
-      );
+      // resolved response
+      .then((response) => {
+        console.log("Fetch1 response", response);
+        // the json property is another promise
+        return response.json();
+      })
+      // resolved json data in response
+      .then((data) => {
+        results.innerText = JSON.stringify(data, null, 2);
+        if (loader) loader.style.display = "none";
+      })
+      // rejected
+      .catch((error) => {
+        console.error(error);
+        results.innerText = "Error fetching data";
+        if (loader) loader.style.display = "none";
+      });
+    console.log("📦 Fetch1 END");
+  }
+
+  /**
+   * Using Fetch API with try/catch and await
+   * @param url
+   */
+  async function doFetch2(url: string) {
+    results.innerText = "Fetching ...";
+    console.log("📦 Fetch2 START");
+    if (loader) loader.style.display = "flex";
+
+    try {
+      // fetch is an asynchronous function that
+      // returns a "response promise"
+      const response = await fetch(url);
+      // resolved response
+      console.log("Fetch2 response", response);
+      // the json property is another promise
+      const data = await response.json();
+      // resolved json data in response
+      results.innerText = JSON.stringify(data, null, 2);
+    } catch (error) {
+      // rejected
+      console.error(error);
+      results.innerText = "Error fetching data";
+      if (loader) loader.style.display = "none";
+    }
+    console.log("📦 Fetch2 END");
   }
 
   const button = document.querySelector("button#fetch");
   if (!button) return;
 
   button.addEventListener("click", () => {
-    console.log("start...");
+    console.log("👇 click callback START 👇");
     const url = select.value;
-    doFetch(url);
+    // try either doFetch1 (promises) or doFetch2 (async/await)
+    doFetch1(url);
+    console.log("👆 click callback END 👆");
   });
 }
 
