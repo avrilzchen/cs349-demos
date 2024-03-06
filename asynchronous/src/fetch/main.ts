@@ -11,11 +11,9 @@ function setup() {
   ) as HTMLSelectElement;
   if (!select) return;
 
-  // optional spinner
-  const spinner = document.querySelector(
-    "#spinner"
-  ) as HTMLDivElement;
-  if (spinner) spinner.style.display = "none";
+  // optional loading animation
+  const loader = document.querySelector("#loader") as HTMLDivElement;
+  if (loader) loader.style.display = "none";
 
   /**
    * Using Fetch API with "thenable" promises
@@ -23,8 +21,8 @@ function setup() {
    */
   async function doFetch1(url: string) {
     results.innerText = "Fetching ...";
-    console.log("Fetch1 START");
-    if (spinner) spinner.style.display = "flex";
+    console.log("📦 Fetch1 START");
+    if (loader) loader.style.display = "flex";
 
     // fetch is an asynchronous function that
     // returns a "response promise"
@@ -38,15 +36,15 @@ function setup() {
       // resolved json data in response
       .then((data) => {
         results.innerText = JSON.stringify(data, null, 2);
-        if (spinner) spinner.style.display = "none";
+        if (loader) loader.style.display = "none";
       })
       // rejected
       .catch((error) => {
         console.error(error);
         results.innerText = "Error fetching data";
-        if (spinner) spinner.style.display = "none";
+        if (loader) loader.style.display = "none";
       });
-    console.log("Fetch1 END");
+    console.log("📦 Fetch1 END");
   }
 
   /**
@@ -55,8 +53,8 @@ function setup() {
    */
   async function doFetch2(url: string) {
     results.innerText = "Fetching ...";
-    console.log("Fetch2 START");
-    if (spinner) spinner.style.display = "flex";
+    console.log("📦 Fetch2 START");
+    if (loader) loader.style.display = "flex";
 
     try {
       // fetch is an asynchronous function that
@@ -72,19 +70,20 @@ function setup() {
       // rejected
       console.error(error);
       results.innerText = "Error fetching data";
-      if (spinner) spinner.style.display = "none";
+      if (loader) loader.style.display = "none";
     }
-    console.log("Fetch2 END");
+    console.log("📦 Fetch2 END");
   }
 
   const button = document.querySelector("button#fetch");
   if (!button) return;
 
   button.addEventListener("click", () => {
-    console.log("click callback START");
+    console.log("👇 click callback START 👇");
     const url = select.value;
-    doFetch2(url);
-    console.log("click callback END");
+    // try either doFetch1 (promises) or doFetch2 (async/await)
+    doFetch1(url);
+    console.log("👆 click callback END 👆");
   });
 }
 

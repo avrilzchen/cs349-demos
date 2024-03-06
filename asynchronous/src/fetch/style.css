@@ -1,0 +1,20 @@
+.loader {
+  --size: 32px;
+  --thickness: calc(var(--size) * 0.15);
+  /* --thickness: 4px; */
+  border: var(--thickness) solid lightgray;
+  border-top: var(--thickness) solid red;
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
