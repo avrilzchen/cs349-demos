@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>fetch</title>
+  </head>
+  <body>
+    <select id="source">
+      <option>
+        https://jsonplaceholder.typicode.com/albums/2/photos
+      </option>
+      <option>
+        https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
+      </option>
+      <option>
+        http://universities.hipolabs.com/search?country=canada
+      </option>
+      <option>http://badrequest.com</option>
+    </select>
+    <button id="fetch">Fetch</button>
+
+    <pre id="results"></pre>
+
+    <!-- <div id="spinner" style="display: none; justify-content: center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only" />
+      </div>
+    </div> -->
+
+    <script type="module" src="main.ts"></script>
+  </body>
+</html>
