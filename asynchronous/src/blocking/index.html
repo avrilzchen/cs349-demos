@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>blocking</title>
+  </head>
+  <body>
+    <label for="quota">Number of primes:</label>
+    <input
+      type="number"
+      id="quota"
+      name="quota"
+      value="3000000"
+      step="100000"
+    />
+
+    <button name="generate">Generate</button>
+    <button name="cancel" disabled>Cancel</button>
+
+    <div id="output"></div>
+
+    <textarea id="user-input" rows="5" cols="50">
+Try typing here immediately after pressing "Generate"</textarea
+    >
+
+    <br /><button name="reload">Reload</button>
+
+    <script type="module" src="main.ts"></script>
+  </body>
+</html>
