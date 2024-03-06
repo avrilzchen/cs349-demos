@@ -1,24 +1,24 @@
-// command is specific to the count state
-// (each command transforms the count state)
-export interface Command {
-  do(state: number): number;
+// using generic type for state
+export interface Command<State> {
+  do(state: State): State;
 }
 
-export class UndoManager {
-  private undoStack: Command[] = [];
-  private redoStack: Command[] = [];
+// using generic type for state
+export class UndoManager<State> {
+  private undoStack: Command<State>[] = [];
+  private redoStack: Command<State>[] = [];
 
   constructor() {}
 
   // the undo manager is responsible for computing the state
-  computeState(base: number): number {
+  computeState(base: State): State {
     // go through all commands and compute the new count state
     return this.undoStack.reduce((acc, command) => {
       return command.do(acc);
     }, base);
   }
 
-  execute(command: Command) {
+  execute(command: Command<State>) {
     // just adds command to the "undo" stack
     this.undoStack.push(command);
     this.redoStack = [];

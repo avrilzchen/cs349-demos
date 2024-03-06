@@ -4,7 +4,8 @@ import { Command, UndoManager } from "./undo";
 export class Model extends Subject {
   //#region undo manager
 
-  private undoManager = new UndoManager();
+  // set the generic type ot number
+  private undoManager = new UndoManager<number>();
 
   undo() {
     this.undoManager.undo();
@@ -42,8 +43,8 @@ export class Model extends Subject {
   set count(newValue: number) {
     // add command to undo stack
     this.undoManager.execute({
-      do: (state: number) => newValue,
-    } as Command);
+      do: (_) => newValue,
+    } as Command<number>);
     // need to notify observers any time the model changes
     this.notifyObservers();
   }
@@ -55,8 +56,8 @@ export class Model extends Subject {
   increment() {
     // add command to undo stack
     this.undoManager.execute({
-      do: (state: number) => state + 1,
-    } as Command);
+      do: (state) => state + 1,
+    } as Command<number>);
 
     // need to notify observers any time the model changes
     this.notifyObservers();
@@ -65,8 +66,8 @@ export class Model extends Subject {
   decrement() {
     // add command to undo stack
     this.undoManager.execute({
-      do: (state: number) => state - 1,
-    } as Command);
+      do: (state) => state - 1,
+    } as Command<number>);
 
     // need to notify observers any time the model changes
     this.notifyObservers();
