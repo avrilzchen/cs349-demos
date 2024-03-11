@@ -1,3 +1,8 @@
+/**
+ * switch between implementations of
+ * HTM, hyperscript, and render function
+ * (vdom.js has simplified implementations for this demo)
+ */
 // import { h, render, html } from "preact";
 import { h, render, html } from "./vdom.js";
 

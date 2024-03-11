@@ -1,3 +1,8 @@
+/**
+ * switch between implementations of
+ * HTM, hyperscript, and render function
+ * (vdom.js has simplified implementations for this demo)
+ */
 // import { h, render } from "preact";
 import { h, render, html } from "./vdom.js";
 
@@ -19,14 +24,14 @@ function ExampleC() {
 }
 
 function ExampleD() {
-  return html`<button onClick=${() => console.log("test")}>
-    Ok
-  </button>`;
-  // return h("button", { onClick: () => (console.log("test")) }, "Ok");
+  // prettier-ignore
+  return html`<button onClick=${() => console.log("🔥 CLICKED!")}>Ok</button>`;
 }
 
-// choose example
-const Example = ExampleD;
+/*
+ * Choose example here
+ */
+const Example = ExampleA;
 
 // print VDOM tree
 console.log(JSON.stringify(Example(), null, 2));

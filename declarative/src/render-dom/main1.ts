@@ -1,3 +1,8 @@
+/**
+ * switch between implementations of
+ * hyperscript and render function
+ * (vdom.js has simplified implementations for this demo)
+ */
 // import { h, render } from "preact";
 import { h, render } from "./vdom.js";
 
@@ -21,11 +26,13 @@ function ExampleC() {
 
 function ExampleD() {
   // prettier-ignore
-  return h("button", { onClick: () => (console.log("test")) }, "Ok");
+  return h("button", { onClick: () => (console.log("🔥 CLICKED!")) }, "Ok");
 }
 
-// choose example
-const Example = ExampleD;
+/*
+ * Choose example here
+ */
+const Example = ExampleA;
 
 // print VDOM tree
 console.log(JSON.stringify(Example(), null, 2));

@@ -1,3 +1,8 @@
+/**
+ * switch between implementations of
+ * hyperscript and render function
+ * (vdom.js has simplified implementations for this demo)
+ */
 // import { h, render } from "preact";
 import { h, render } from "./vdom.js";
 

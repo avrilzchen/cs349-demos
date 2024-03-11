@@ -1,15 +1,37 @@
 /**
- * hyperscript tag
+ * Demo implementations of a simple virtual DOM library.
+ * Inspired and based on:
+ *   https://dev.to/fromaline/hyperscript-the-hidden-language-of-react-3d1f
+ *   https://github.com/zserge/o
  */
-export function h(tag, attributes = {}, ...child) {
-  let children = [].concat(...child); //child.length ? [].concat(...child) : null;
+
+/**
+ * hyperscript virtual node definition
+ * @typedef {string} tag name or text
+ * @typedef {Object.<string, string>} attributes
+ * @typedef {VNode} children
+ */
+export function h(tag, attributes = {}, ..._children) {
+  // force children to be an array (possibly empty)
+  const children = [].concat(..._children);
   return { tag, attributes, children };
 }
 
+/**
+ * render hyperscript virtual node tree into a DOM element
+ * @typedef {VNode} vnode root of hyperscript virtual node tree
+ * @typedef {HTMLElement} dom element to render into
+ */
 export function render(vnode, dom) {
   dom.replaceChildren(_render(vnode));
 }
 
+/**
+ * render hyperscript virtual node to a DOM element
+ * (recursive calls produce a DOM tree fragment)
+ * @typedef {VNode} vnode hyperscript virtual node
+ * @returns {HTMLElement} root element with children
+ */
 function _render(vnode) {
   // if vnode is a string, create text node
   if (typeof vnode === "string") {
@@ -22,10 +44,15 @@ function _render(vnode) {
   let attributes = vnode.attributes || {};
   Object.keys(attributes).forEach((k) => {
     if (k.startsWith("on")) {
-      const event = k.substring(2).toLowerCase();
-      el.addEventListener(event, attributes[k]);
+      // special case for event listener attributes
+      const type = k.substring(2).toLowerCase();
+      const handler = attributes[k];
+      el.addEventListener(type, handler);
     } else {
-      el.setAttribute(k, attributes[k]);
+      // just a normal attribute
+      const name = k;
+      const value = attributes[k];
+      el.setAttribute(name, value);
     }
   });
 
@@ -36,6 +63,8 @@ function _render(vnode) {
 }
 
 /**
+ * from: https://github.com/zserge/o
+ *
  * Create a virtual node based on the HTML-like template string, i.e:
  * `<tag attr="value" attr2="value2"></tag>`. Tags can be self-closing.
  * Attribute values must be double quoted, unless they are placeholders.
