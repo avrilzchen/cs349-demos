@@ -1,9 +1,9 @@
-import { Todo, updateTodo, deleteTodo, selectedTodo } from "./state";
-
 import "./TodoItem.css";
 
+import * as State from "./state";
+
 type TodoItemProps = {
-  todo: Todo;
+  todo: State.Todo;
 };
 
 export default function TodoItem({ todo }: TodoItemProps) {
@@ -12,16 +12,18 @@ export default function TodoItem({ todo }: TodoItemProps) {
       <input
         type="checkbox"
         checked={todo.done}
-        onInput={() => updateTodo(todo.id, { done: !todo.done })}
+        onInput={() =>
+          State.updateTodo(todo.id, { done: !todo.done })
+        }
       />
       <span>{todo.task}</span>
       <button
-        onClick={() => (selectedTodo.value = todo.id)}
-        disabled={selectedTodo.value === todo.id}
+        onClick={() => (State.selectedTodoId.value = todo.id)}
+        disabled={State.selectedTodoId.value === todo.id}
       >
         ✏️
       </button>
-      <button onClick={() => deleteTodo(todo.id)}>🗑️</button>
+      <button onClick={() => State.deleteTodo(todo.id)}>🗑️</button>
     </div>
   );
 }

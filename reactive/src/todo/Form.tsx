@@ -1,7 +1,8 @@
-import { addTodo, selectedTodo, updateTodo } from "./state";
 import { useRef } from "preact/hooks";
 
 import "./Form.css";
+
+import * as State from "./state";
 
 type FormProps = {
   editId: number | null;
@@ -18,11 +19,11 @@ export default function Form({ editId, initialValue }: FormProps) {
     if (!inputValue) return;
 
     if (editId) {
-      updateTodo(editId, { task: inputValue });
+      State.updateTodo(editId, { task: inputValue });
     } else {
-      addTodo(inputValue);
+      State.addTodo(inputValue);
     }
-    selectedTodo.value = null;
+    State.selectedTodoId.value = null;
   }
 
   return (

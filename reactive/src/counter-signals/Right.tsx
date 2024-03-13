@@ -1,5 +1,5 @@
 // app state
-import { count } from "./AppState";
+import * as State from "./state";
 
 type RightViewProps = {
   colour?: string;
@@ -10,7 +10,7 @@ export default function RightView({
 }: RightViewProps) {
   return (
     <div class="right-view">
-      {[...Array(count.value)].map((_, i) => (
+      {[...Array(State.count.value)].map((_, i) => (
         <NumberBox num={i + 1} colour={colour} />
       ))}
     </div>

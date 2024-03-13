@@ -1,17 +1,14 @@
 import { computed, signal } from "@preact/signals";
 
-//#region utility functions
-
-//#endregion
-
-//#region state
-
 export type Todo = {
   id: number;
   task: string;
   done: boolean;
 };
 
+//#region state
+
+// the array of all Todos
 export const todos = signal<Todo[]>([]);
 
 export const num = computed(() => todos.value.length);
@@ -20,8 +17,24 @@ export const numDone = computed(
   () => todos.value.filter((t) => t.done).length
 );
 
-// selected todo ID to edit
-export const selectedTodo = signal<number | null>(null);
+// selected todo ID (for editing)
+export const selectedTodoId = signal<number | null>(null);
+
+// // selected todo (just a shortcut, not used in demo)
+// export const selectedTodo = computed(() => {
+//   return selectedTodoId.value
+//     ? getTodo(selectedTodoId.value)
+//     : undefined;
+// });
+
+//#endregion
+
+//#region convenience functions
+
+// Read
+export const getTodo = (id: number): Todo | undefined => {
+  return todos.value.find((t) => t.id === id);
+};
 
 //#endregion
 
@@ -52,12 +65,7 @@ export const addTodo = (task: string) => {
   //     done: false,
   //   });
 
-  selectedTodo.value = null;
-};
-
-// Read
-export const getTodo = (id: number): Todo | undefined => {
-  return todos.value.find((t) => t.id === id);
+  selectedTodoId.value = null;
 };
 
 // Update
@@ -70,7 +78,7 @@ export const updateTodo = (
     // with defined properties in todo object argument
     t.id === id ? { ...t, ...todo } : t
   );
-  selectedTodo.value = null;
+  selectedTodoId.value = null;
 };
 
 // Delete
@@ -78,21 +86,9 @@ export const deleteTodo = (id: number) => {
   // GOOD: assigns new array, signal will know
   todos.value = todos.value.filter((t) => t.id !== id);
   // edge case if editing a todo that is deleted
-  if (selectedTodo.value === id) {
-    selectedTodo.value = null;
+  if (selectedTodoId.value === id) {
+    selectedTodoId.value = null;
   }
 };
-
-// export const toggleTodo = (id: number) => {
-//   // GOOD: assigns new array, signal will know
-//   todos.value = todos.value.map((t) =>
-//     t.id === id
-//       ? ({
-//           ...t,
-//           done: !t.done,
-//         } as Todo)
-//       : t
-//   );
-// };
 
 //#endregion

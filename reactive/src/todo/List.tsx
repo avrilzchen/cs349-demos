@@ -1,12 +1,13 @@
-import { todos } from "./state";
 import TodoItem from "./TodoItem";
 
 import "./List.css";
 
+import * as State from "./state";
+
 export default function List() {
   return (
     <div id="list">
-      {todos.value.map((todo) => (
+      {State.todos.value.map((todo) => (
         <TodoItem todo={todo} />
       ))}
     </div>

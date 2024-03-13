@@ -1,16 +1,16 @@
-import { h, render } from "preact";
+import { render } from "preact";
 
 import Form from "./Form";
 import List from "./List";
-import FormRef from "./FormRef";
 import Info from "./Info";
 
 import "./main.css";
-import { getTodo, selectedTodo } from "./state";
+
+import * as State from "./state";
 
 export default function App() {
-  const id = selectedTodo.value;
-  const value = id && getTodo(id)?.task;
+  const id = State.selectedTodoId.value;
+  const value = id && State.getTodo(id)?.task;
 
   return (
     <>
