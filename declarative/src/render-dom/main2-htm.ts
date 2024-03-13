@@ -3,8 +3,9 @@
  * HTM, hyperscript, and render function
  * (vdom.js has simplified implementations for this demo)
  */
-// import { h, render, html } from "preact";
-import { h, render, html } from "./vdom.js";
+// import { render } from "preact";
+// import { html } from "htm/preact";
+import { render, html } from "./vdom.js";
 
 import "./main2.css";
 

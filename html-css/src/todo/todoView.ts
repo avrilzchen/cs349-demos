@@ -11,7 +11,7 @@ export class TodoView implements View {
     const todo = this.model.todo(this.todoId);
     if (!todo) return;
     this.checkbox.checked = todo.done;
-    this.todoText.innerText = `${todo.text || "?"} (id#${todo.id})`;
+    this.todoText.innerText = `${todo.task || "?"} (id#${todo.id})`;
     this.selectButton.disabled = todo.done;
   }
 

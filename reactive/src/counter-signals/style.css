@@ -1,0 +1,61 @@
+/* usual reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* use alternative box model */
+div {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+div#app {
+  margin: 50px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  gap: 50px;
+}
+
+div.left-view {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: white;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  min-width: 80px;
+}
+
+div.right-view {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: white;
+  flex: 1 1 0;
+  flex-flow: row wrap;
+  display: flex;
+  align-content: flex-start;
+  overflow: scroll;
+}
+
+/* the blue number squares */
+div.right-view div {
+  margin: 5px;
+  padding: 10px;
+  background-color: rgb(148, 211, 127);
+  flex: 0 0 auto;
+}
