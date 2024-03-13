@@ -11,7 +11,7 @@ export class FormView implements View {
     const id = this.model.selectId;
     if (id !== null) {
       this.button.innerText = "Update";
-      this.textfield.value = this.model.todo(id)?.text || "";
+      this.textfield.value = this.model.todo(id)?.task || "";
     } else {
       this.button.innerText = "Add";
       this.textfield.value = "";

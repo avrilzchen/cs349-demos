@@ -1,0 +1,5 @@
+div#list {
+  background-color: whitesmoke;
+  flex: 1;
+  overflow: scroll;
+}

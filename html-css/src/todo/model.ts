@@ -2,7 +2,7 @@ import { Subject } from "./observer";
 
 type Todo = {
   id: number;
-  text: string;
+  task: string;
   done: boolean;
 };
 
@@ -28,7 +28,7 @@ export class Model extends Subject {
   create(task: string) {
     this.todos = [
       ...this.todos,
-      { id: uniqueId++, text: task, done: false },
+      { id: uniqueId++, task, done: false },
     ];
     this.notifyObservers();
   }
