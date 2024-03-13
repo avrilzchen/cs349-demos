@@ -16,7 +16,7 @@ export default function Form({ editId, initialValue }: FormProps) {
   function handleSubmit(e: Event) {
     // get input element value using ref hook
     const inputValue = inputRef.current?.value;
-    if (!inputValue) return;
+    if (inputValue === undefined) return;
 
     if (editId) {
       State.updateTodo(editId, { task: inputValue });
