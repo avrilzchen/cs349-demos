@@ -1,5 +1,6 @@
-import { h } from "preact";
-import { Todo, toggleTodo, deleteTodo } from "./AppState";
+import { Todo, updateTodo, deleteTodo, selectedTodo } from "./state";
+
+import "./TodoItem.css";
 
 type TodoItemProps = {
   todo: Todo;
@@ -7,14 +8,20 @@ type TodoItemProps = {
 
 export default function TodoItem({ todo }: TodoItemProps) {
   return (
-    <li key={todo.id}>
+    <div class="todo" key={todo.id}>
       <input
         type="checkbox"
-        checked={todo.completed}
-        onInput={() => toggleTodo(todo.id)}
+        checked={todo.done}
+        onInput={() => updateTodo(todo.id, { done: !todo.done })}
       />
-      <span>{todo.text}</span>
-      <button onClick={() => deleteTodo(todo.id)}>x</button>
-    </li>
+      <span>{todo.task}</span>
+      <button
+        onClick={() => (selectedTodo.value = todo.id)}
+        disabled={selectedTodo.value === todo.id}
+      >
+        ✏️
+      </button>
+      <button onClick={() => deleteTodo(todo.id)}>🗑️</button>
+    </div>
   );
 }

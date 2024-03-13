@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { addTodo, getTodo, selectedTodo, updateTodo } from "./state";
 import { useState } from "preact/hooks";
 

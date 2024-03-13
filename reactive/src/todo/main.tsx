@@ -1,15 +1,24 @@
 import { h, render } from "preact";
 
-import "./style.css";
-import TodoForm from "./TodoForm";
-import TodoList from "./TodoList";
-import TodoFormRef from "./TodoFormRef";
+import Form from "./Form";
+import List from "./List";
+import FormRef from "./FormRef";
+import Info from "./Info";
+
+import "./main.css";
+import { getTodo, selectedTodo } from "./state";
 
 export default function App() {
+  const id = selectedTodo.value;
+  const value = id && getTodo(id)?.task;
+
   return (
     <>
-      <TodoForm />
-      <TodoList />
+      <div id="left">
+        <Form editId={id} initialValue={value || ""} />
+        <List />
+      </div>
+      <Info />
     </>
   );
 }

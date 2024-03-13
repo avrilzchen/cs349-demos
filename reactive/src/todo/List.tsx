@@ -1,13 +1,14 @@
-import { h } from "preact";
-import { todos } from "./AppState";
+import { todos } from "./state";
 import TodoItem from "./TodoItem";
 
-export default function TodoList() {
+import "./List.css";
+
+export default function List() {
   return (
-    <ul>
+    <div id="list">
       {todos.value.map((todo) => (
         <TodoItem todo={todo} />
       ))}
-    </ul>
+    </div>
   );
 }

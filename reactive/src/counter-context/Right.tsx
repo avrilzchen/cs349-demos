@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { useContext } from "preact/hooks";
 // app state
 import { CountContext } from "./CountContext";
