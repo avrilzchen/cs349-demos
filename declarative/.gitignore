@@ -1,3 +1,6 @@
+#cache directory
+.vite
+
 # Logs
 logs
 *.log
