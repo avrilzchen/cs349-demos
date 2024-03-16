@@ -10,13 +10,13 @@ export default function RightView({
   colour = "aquamarine",
 }: RightViewProps) {
   // alternative method to return an array of JSX elements
-  function loop(n: number) {
-    let nodes: JSX.Element[] = [];
-    for (let i = 0; i < n; i++) {
-      nodes.push(<NumberBox num={i + 1} colour={colour} />);
-    }
-    return nodes;
-  }
+  // function loop(n: number) {
+  //   let nodes: JSX.Element[] = [];
+  //   for (let i = 0; i < n; i++) {
+  //     nodes.push(<NumberBox num={i + 1} colour={colour} />);
+  //   }
+  //   return nodes;
+  // }
 
   return (
     <div class="right-view">
