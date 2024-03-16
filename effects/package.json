@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.8.1",
-    "html-template-tag": "^4.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.6"
   }
