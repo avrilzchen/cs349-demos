@@ -1,0 +1,22 @@
+.root {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: white;
+  flex: 1 1 0;
+  flex-flow: row wrap;
+  display: flex;
+  align-content: flex-start;
+  overflow: scroll;
+}
+
+/* the number squares */
+div.root > div {
+  margin: 5px;
+  padding: 10px;
+  flex: 0 0 auto;
+}
+
+div.root > div:hover {
+  color: red;
+  cursor: grab;
+}

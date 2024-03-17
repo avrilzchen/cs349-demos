@@ -1,0 +1,15 @@
+.root {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.container {
+  margin: 50px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  gap: 50px;
+}
