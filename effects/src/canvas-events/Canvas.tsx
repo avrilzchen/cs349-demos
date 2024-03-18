@@ -38,8 +38,7 @@ export function Canvas({
   useLayoutEffect(() => {
     const gc = canvasRef.current?.getContext("2d");
     if (gc) draw(gc);
-  }),
-    [movePoint];
+  }, [movePoint, point]);
 
   function draw(gc: CanvasRenderingContext2D) {
     gc.fillStyle = "black";
