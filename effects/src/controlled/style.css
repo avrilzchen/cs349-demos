@@ -1,0 +1,11 @@
+input:invalid,
+input.invalid {
+  outline-offset: 1px;
+  outline: 2px solid red;
+}
+
+p.error {
+  color: red;
+  font-size: 11pt;
+  margin-top: 3px;
+}

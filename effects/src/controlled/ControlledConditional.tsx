@@ -1,12 +1,7 @@
-import { render } from "preact";
-
-import { signal } from "@preact/signals";
 import { useEffect, useState } from "preact/hooks";
+import { appState } from "./state";
 
-// Application state
-const appState = signal("abc");
-
-export default function Test() {
+export default function ControlledConditional() {
   // local state for the input value
   const [inputValue, setInputValue] = useState(appState.value);
 
@@ -20,30 +15,29 @@ export default function Test() {
 
   // handler for input changes
   const handleInput = (e: Event) => {
-    const newValue = (e.target as HTMLInputElement).value;
+    const el = e.target as HTMLInputElement;
     // Update local state immediately
-    setInputValue(newValue);
-
+    setInputValue(el.value);
     // only if valid, update the app state
-    if (isValid(newValue)) {
-      appState.value = newValue;
+    if (isValid(el.value)) {
+      appState.value = el.value;
     }
   };
 
   return (
-    <div>
-      <button onClick={() => (appState.value = "abc")}>Reset</button>
-      <h2>'{appState}'</h2>
+    <>
+      <p>ControlledConditional</p>
       <input
-        value={inputValue}
         type="text"
+        value={inputValue}
+        class={!isValid(inputValue) ? "invalid" : ""}
         onInput={handleInput}
         // always leave input field with valid value
         onChange={() => setInputValue(appState.value)}
       />
-      {!isValid(inputValue) && <p>Invalid: use a, b, or c</p>}
-    </div>
+      {!isValid(inputValue) && (
+        <p class="error">Invalid: use a, b, or c</p>
+      )}
+    </>
   );
 }
-
-render(<Test />, document.body);
