@@ -6,8 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-button {
-  min-width: 80px;
+  button {
+    min-width: 80px;
+    color: violet;
+  }
 }
