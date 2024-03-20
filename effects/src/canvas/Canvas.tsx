@@ -12,8 +12,7 @@ export function Canvas({ width = 256, height = 256 }: CanvasProps) {
   useLayoutEffect(() => {
     const gc = canvasRef.current?.getContext("2d");
     if (gc) draw(gc);
-  }),
-    [];
+  }, []);
 
   function draw(gc: CanvasRenderingContext2D) {
     gc.fillStyle = "black";

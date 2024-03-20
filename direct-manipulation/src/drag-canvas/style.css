@@ -1,0 +1,20 @@
+/* usual reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  /* use alternative box model */
+  box-sizing: border-box;
+}
+
+div#app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  background-color: whitesmoke;
+  border: 1px solid black;
+}
