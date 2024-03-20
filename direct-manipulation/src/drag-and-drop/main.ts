@@ -11,7 +11,7 @@ let items = document.querySelectorAll(
 items.forEach((item) => {
   // drag start
   item.addEventListener("dragstart", (e) => {
-    console.log(`dragstart ${item.id}`);
+    console.log(`🟢 dragstart ${item.id}`);
 
     // update feedback style
     item.classList.add("dragging");
@@ -40,7 +40,7 @@ items.forEach((item) => {
     item.classList.add("over");
   });
 
-  // drag enter
+  // drag leave
   item.addEventListener("dragleave", (e) => {
     console.log(`dragleave ${item.id}`);
     // update feedback styles
@@ -49,7 +49,7 @@ items.forEach((item) => {
 
   // drag end
   item.addEventListener("dragend", (e) => {
-    console.log(`dragend ${item.id}`);
+    console.log(`🛑 dragend ${item.id}`);
     // update feedback styles
     item.classList.remove("dragging");
     items.forEach(function (item) {
@@ -59,13 +59,13 @@ items.forEach((item) => {
 
   // drag drop
   item.addEventListener("drop", (e) => {
-    console.log(
-      `drop ${item.id} (drop ${draggedItem.id} on ${item.id})`
-    );
+    console.log(`👍 drop ${draggedItem.id} on ${item.id}`);
     if (draggedItem !== item && e.dataTransfer) {
       // this does the actual swapping of the elements
       draggedItem.innerHTML = item.innerHTML;
-      item.innerHTML = e.dataTransfer.getData("text/html");
+      const data = e.dataTransfer.getData("text/html");
+      item.innerHTML = data;
+      console.log(`  data '${data}'`);
     }
   });
 });
