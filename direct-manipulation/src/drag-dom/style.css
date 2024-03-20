@@ -1,0 +1,31 @@
+/* usual reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  /* use alternative box model */
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#app {
+  width: 400px;
+  height: 400px;
+  background-color: whitesmoke;
+  border: 1px solid darkgray;
+}
+
+.circle {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.9);
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: move;
+}
