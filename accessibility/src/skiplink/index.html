@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>skiplink</title>
+    <style>
+      body {
+        background-color: white;
+      }
+
+      a:link {
+        color: blue;
+      }
+
+      /* skip link rules */
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .skip:focus {
+        position: static;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#maincontent" class="skip">Skip to main content</a>
+    <header>
+      <h1>Company</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="maincontent">
+      <h1>Content</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Deleniti veniam modi, officia optio sint distinctio molestiae
+        reiciendis repellat porro ducimus. Quidem ad, aliquam non
+        facilis recusandae ea. Vero, nam blanditiis!
+      </p>
+    </section>
+  </body>
+</html>
