@@ -14,7 +14,7 @@ document.addEventListener("resize", () => {
 
 const gc = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-const shape = new ResizableShape(100, 100, 100, 100);
+const shape = new ResizableShape(100, 100, 200, 200);
 
 let m = { x: 0, y: 0 };
 let c = { x: 100, y: 100 };
