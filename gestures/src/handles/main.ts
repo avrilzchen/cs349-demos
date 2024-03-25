@@ -2,60 +2,44 @@ import { ResizableShape } from "./resizable";
 
 console.log("handles");
 
-const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+//#region canvas setup
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function createDrawLoop(
+  draw: (gc: CanvasRenderingContext2D) => void
+) {
+  // create canvas
+  const canvas = document.createElement("canvas");
+  document.body.appendChild(canvas);
+  const gc = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-document.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+  // match size to body
+  const setSize = () => {
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+  };
+  document.addEventListener("resize", setSize);
+  setSize();
 
-const gc = canvas.getContext("2d") as CanvasRenderingContext2D;
+  // create the draw loop
+  function loop() {
+    draw(gc);
+    requestAnimationFrame(loop);
+  }
+  loop();
 
-const shape = new ResizableShape(100, 150, 200, 200);
-
-let m = { x: 0, y: 0 };
-let c = { x: 100, y: 100 };
-let p = { x: 100, y: 50 };
-
-canvas.addEventListener("mousedown", (e) =>
-  shape.mousedown(e.clientX, e.clientY)
-);
-
-canvas.addEventListener("mousemove", (e) => {
-  shape.mousemove(e.clientX, e.clientY);
-  m = { x: e.clientX, y: e.clientY };
-});
-
-canvas.addEventListener("mouseup", (e) =>
-  shape.mouseup(e.clientX, e.clientY)
-);
-
-function draw(gc: CanvasRenderingContext2D) {
-  gc.fillStyle = "whitesmoke";
-  gc.fillRect(0, 0, canvas.width, canvas.height);
-
-  //   gc.translate(100, 100);
-  shape.draw(gc);
-
-  //   gc.beginPath();
-  //   gc.moveTo(c.x, c.y);
-  //   gc.lineTo(p.x, p.y);
-  //   gc.strokeStyle = "red";
-  //   gc.stroke();
-  //   gc.beginPath();
-  //   gc.moveTo(c.x, c.y);
-  //   gc.lineTo(m.x, m.y);
-  //   gc.strokeStyle = "blue";
-  //   gc.stroke();
-
-  //   const a = (Math.atan2(p.y - c.y, p.x - c.x) * 180) / Math.PI;
-  //   const b = (Math.atan2(m.y - c.y, m.x - c.x) * 180) / Math.PI;
-  //   console.log(a, b, a - b);
-
-  requestAnimationFrame(() => draw(gc));
+  return canvas;
 }
 
-requestAnimationFrame(() => draw(gc));
+//#endregion
+
+// simple resizable shape
+const shape = new ResizableShape(100, 150, 200, 200);
+
+const canvas = createDrawLoop((gc) => {
+  gc.fillStyle = "whitesmoke";
+  gc.fillRect(0, 0, gc.canvas.width, gc.canvas.height);
+
+  shape.draw(gc);
+});
+
+shape.addListeners(canvas);

@@ -1,20 +1,9 @@
-function insideHitTestCircle(
-  mx: number,
-  my: number,
-  x: number,
-  y: number,
-  r: number
-) {
-  return (mx - x) ** 2 + (my - y) ** 2 <= r ** 2;
-}
-
-function rotate(x: number, y: number, angle: number, cx = 0, cy = 0) {
-  angle = (angle * Math.PI) / 180;
-  return [
-    (x - cx) * Math.cos(angle) - (y - cy) * Math.sin(angle) + cx,
-    (x - cx) * Math.sin(angle) + (y - cy) * Math.cos(angle) + cy,
-  ];
-}
+import {
+  drawCross,
+  insideHitTestCentredRectangle,
+  insideHitTestCircle,
+  rotate,
+} from "./utility";
 
 export class ResizableShape {
   constructor(
@@ -25,36 +14,45 @@ export class ResizableShape {
     public angle = 0
   ) {}
 
-  mode: "none" | "scale" | "rotate" | "translate" = "none";
+  mode: "idle" | "scale" | "rotate" | "translate" = "idle";
 
   handleSize = 8;
 
-  deltaX = 0;
-  deltaY = 0;
-  deltaWidth = 0;
-  deltaHeight = 0;
-  deltaAngle = 0;
+  addListeners(canvas: HTMLCanvasElement) {
+    canvas.addEventListener("mousedown", (e) =>
+      this.mousedown(e.clientX, e.clientY)
+    );
+    canvas.addEventListener("mousemove", (e) =>
+      this.mousemove(e.clientX, e.clientY)
+    );
+    canvas.addEventListener("mouseup", (e) =>
+      this.mouseup(e.clientX, e.clientY)
+    );
+  }
 
-  offset = { x: 0, y: 0 };
-  start = { x: 0, y: 0 };
-
-  transformMouseToShapeCoordinates(mx: number, my: number) {
-    [mx, my] = rotate(mx, my, -this.angle, this.x, this.y);
-
-    mx -= this.x; // + this.width / 2;
-    my -= this.y; // + this.height / 2;
+  transformMouseToShapeCoordinates(_mx: number, _my: number) {
+    // transform mouse to shape coordinates
+    // (_mx, _my) is mouse in world coordinates
+    // (mx, my) is mouse in shape coordinates
+    let mx = _mx - this.x;
+    let my = _my - this.y;
+    [mx, my] = rotate(mx, my, -this.angle, 0, 0);
 
     return { mx, my };
   }
 
+  // drag deltas
+  delta = { x: 0, y: 0, width: 0, height: 0, angle: 0 };
+  // where drag started (in shape coordinates)
+  dragStart = { x: 0, y: 0 };
+
   mousedown(_mx: number, _my: number) {
-    // transform mouse to shape coordinates
+    // transform mouse position to shape coordinates
     const { mx, my } = this.transformMouseToShapeCoordinates(
       _mx,
       _my
     );
 
-    let hit = false;
     if (
       insideHitTestCircle(
         mx,
@@ -65,7 +63,6 @@ export class ResizableShape {
       )
     ) {
       this.mode = "scale";
-      hit = true;
     } else if (
       insideHitTestCircle(
         mx,
@@ -76,120 +73,105 @@ export class ResizableShape {
       )
     ) {
       this.mode = "rotate";
-      hit = true;
     } else if (
-      mx >= -this.width / 2 &&
-      mx <= this.width / 2 &&
-      my >= -this.height / 2 &&
-      my <= this.height / 2
+      insideHitTestCentredRectangle(
+        mx,
+        my,
+        0,
+        0,
+        this.width,
+        this.height
+      )
     ) {
       this.mode = "translate";
-      hit = true;
     }
 
-    if (hit) {
-      this.offset = { x: mx - this.width, y: my - this.height };
-      this.start = { x: this.width, y: this.height };
-    }
-
-    console.log(
-      `mousedown: "${this.mode}" _m (${_mx}, ${_my}) m (${mx}, ${my}) `
-    );
+    // save starting position
+    this.dragStart = { x: mx, y: my };
   }
 
   mousemove(_mx: number, _my: number) {
-    // transform mouse to shape coordinates
+    // transform mouse position to shape coordinates
     const { mx, my } = this.transformMouseToShapeCoordinates(
       _mx,
       _my
     );
 
-    const dx = mx - this.start.x - this.offset.x;
-    const dy = my - this.start.y - this.offset.y;
-
-    if (this.mode !== "none") {
-      console.log(
-        `mousemove: ${this.mode} _m (${_mx}, ${_my}) m (${mx}, ${my}) dx: ${dx}, dy: ${dy} (${this.deltaX}, ${this.deltaY}) (${this.deltaWidth}, ${this.deltaHeight}) (${this.deltaAngle}`
-      );
-    }
+    // calculate drag delta (dx, dy)
+    const dx = mx - this.dragStart.x;
+    const dy = my - this.dragStart.y;
 
     switch (this.mode) {
       case "scale":
-        this.deltaWidth = dx;
-        this.deltaHeight = dy;
         {
-          const [ddx, ddy] = rotate(dx, dy, this.angle, 0, 0);
-          this.deltaX = ddx / 2;
-          this.deltaY = ddy / 2;
+          // use drag delta for width and height
+          this.delta.width = dx;
+          this.delta.height = dy;
+          // adjust the shape centre to keep opposite corner fixed
+          const [dxRotated, dyRotated] = rotate(dx, dy, this.angle);
+          this.delta.x = dxRotated / 2;
+          this.delta.y = dyRotated / 2;
         }
-        console.log(`scale: ${dy}, ${dy}`);
-        // this.start = { x: mx - this.offset.x, y: my - this.offset.y };
         break;
       case "translate":
-        // const [ddx, ddy] = this.transformMouseToShapeCoordinates(dx, dy);
-        const [ddx, ddy] = rotate(dx, dy, this.angle, 0, 0);
-        this.deltaX = ddx;
-        this.deltaY = ddy; //_my - this.start.y - this.offset.y;
+        {
+          const [dxRotated, dyRotated] = rotate(dx, dy, this.angle);
+          this.delta.x = dxRotated;
+          this.delta.y = dyRotated;
+        }
         break;
       case "rotate":
-        const up = { x: 0, y: -this.height / 2 };
-
-        const a = (Math.atan2(my, mx) * 180) / Math.PI;
-        const b = (Math.atan2(up.y, up.x) * 180) / Math.PI;
-        const da = a - b;
-        console.log(
-          `🔥 rotate: mouse (${[mx, my]}) up (${[
-            up.x,
-            up.y,
-          ]}) ${a}°, ${b}° ==> ${da}°`
-        );
-        this.deltaAngle = da;
-        // this.start = { x: mx - this.offset.x, y: my - this.offset.y };
-        // console.log(`rotate: ${dy}, ${dy} => ${this.angle}`);
+        {
+          const handlePoint = { x: 0, y: -this.height / 2 };
+          const mouseAngle = Math.atan2(my, mx);
+          const handleAngle = Math.atan2(
+            handlePoint.y,
+            handlePoint.x
+          );
+          this.delta.angle = mouseAngle - handleAngle;
+        }
         break;
     }
   }
 
   mouseup(mx: number, my: number) {
+    // apply the delta transformations
     switch (this.mode) {
       case "scale":
-        this.width += this.deltaWidth;
-        this.height += this.deltaHeight;
-        this.x += this.deltaX;
-        this.y += this.deltaY;
+        this.width += this.delta.width;
+        this.height += this.delta.height;
+        this.x += this.delta.x;
+        this.y += this.delta.y;
         break;
       case "translate":
-        this.x += this.deltaX;
-        this.y += this.deltaY;
+        this.x += this.delta.x;
+        this.y += this.delta.y;
         break;
       case "rotate":
-        this.angle += this.deltaAngle;
+        this.angle += this.delta.angle;
         break;
     }
-
-    this.mode = "none";
-
-    this.deltaX = 0;
-    this.deltaY = 0;
-    this.deltaWidth = 0;
-    this.deltaHeight = 0;
-    this.deltaAngle = 0;
+    // clear the delta and mode
+    this.delta = { x: 0, y: 0, width: 0, height: 0, angle: 0 };
+    this.mode = "idle";
   }
 
   draw(gc: CanvasRenderingContext2D) {
-    const x = this.x + this.deltaX;
-    const y = this.y + this.deltaY;
-    const width = this.width + this.deltaWidth;
-    const height = this.height + this.deltaHeight;
-    const angle = this.angle + this.deltaAngle;
+    // apply delta transformations
+    const x = this.x + this.delta.x;
+    const y = this.y + this.delta.y;
+    const width = this.width + this.delta.width;
+    const height = this.height + this.delta.height;
+    const angle = this.angle + this.delta.angle;
 
     gc.save();
+    // set shape position and rotation
     gc.translate(x, y);
+    gc.rotate(angle);
 
-    gc.rotate((angle * Math.PI) / 180);
+    // draw everything in base shape coordinate frame
 
-    // gc.translate(-width / 2, -height / 2);
-
+    // rectangle centred at 0,0
     gc.beginPath();
     gc.rect(-width / 2, -height / 2, width, height);
     gc.fillStyle =
@@ -199,7 +181,7 @@ export class ResizableShape {
     gc.lineWidth = 1;
     gc.stroke();
 
-    // scale handle
+    // scale handle is at lower-right corner
     gc.beginPath();
     gc.arc(width / 2, height / 2, this.handleSize, 0, 2 * Math.PI);
     gc.fillStyle = this.mode === "scale" ? "LightSkyBlue" : "white";
@@ -207,14 +189,13 @@ export class ResizableShape {
     gc.strokeStyle = "black";
     gc.stroke();
 
-    // rotate handle
+    // rotate handle is centred at top
     const handleY = -height / 2 - this.handleSize * 3;
     gc.beginPath();
     gc.moveTo(0, -height / 2);
     gc.lineTo(0, handleY);
     gc.strokeStyle = "black";
     gc.stroke();
-
     gc.beginPath();
     gc.arc(0, handleY, this.handleSize, 0, 2 * Math.PI);
     gc.fillStyle = this.mode === "rotate" ? "LightSkyBlue" : "white";
@@ -222,7 +203,7 @@ export class ResizableShape {
     gc.strokeStyle = "black";
     gc.stroke();
 
-    // draw centre to make demo easier to understand
+    // cross at centre (to make demo clearer)
     gc.strokeStyle =
       this.mode === "rotate" || this.mode === "scale"
         ? "OrangeRed"
@@ -231,19 +212,4 @@ export class ResizableShape {
 
     gc.restore();
   }
-}
-
-function drawCross(
-  gc: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  size = 5
-) {
-  gc.beginPath();
-  gc.moveTo(x - size, y);
-  gc.lineTo(x + size, y);
-  gc.moveTo(x, y - size);
-  gc.lineTo(x, y + size);
-  gc.lineWidth = 1;
-  gc.stroke();
 }
