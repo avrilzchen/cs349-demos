@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>forms</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <form>
+      <label for="name">Name:</label>
+      <input
+        id="name"
+        type="text"
+        autocomplete="name"
+        aria-required="true"
+      />
+
+      <fieldset>
+        <legend>Choose a shipping method:</legend>
+        <input
+          id="overnight"
+          type="radio"
+          name="shipping"
+          value="overnight"
+        />
+        <label for="overnight">Overnight</label>
+        <input
+          id="twoday"
+          type="radio"
+          name="shipping"
+          value="twoday"
+        />
+        <label for="twoday">Two day</label>
+        <input
+          id="ground"
+          type="radio"
+          name="shipping"
+          value="ground"
+        />
+        <label for="ground">Ground</label>
+      </fieldset>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
