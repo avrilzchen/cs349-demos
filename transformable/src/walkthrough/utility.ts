@@ -6,18 +6,27 @@ export const insideHitTestCircle = (
   r: number
 ) => (mx - x) ** 2 + (my - y) ** 2 <= r ** 2;
 
-export const insideHitTestCentredRectangle = (
+export const insideHitTestRectangle = (
   mx: number,
   my: number,
   x: number,
   y: number,
   width: number,
   height: number
-) =>
-  mx >= x - width / 2 &&
-  mx <= x + width / 2 &&
-  my >= y - height / 2 &&
-  my <= y + height / 2;
+) => mx >= x && mx <= x + width && my >= y && my <= y + height;
+
+// export const insideHitTestCentredRectangle = (
+//   mx: number,
+//   my: number,
+//   x: number,
+//   y: number,
+//   width: number,
+//   height: number
+// ) =>
+//   mx >= x - width / 2 &&
+//   mx <= x + width / 2 &&
+//   my >= y - height / 2 &&
+//   my <= y + height / 2;
 
 export const rotate = (
   x: number,

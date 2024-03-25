@@ -1,6 +1,7 @@
-import { ResizableShape } from "./resizable";
+import { Transformable } from "./transformable";
+// import { Transformable } from "./transformable-demo0";
 
-console.log("handles");
+console.log("transformable");
 
 //#region canvas setup
 
@@ -33,7 +34,7 @@ function createDrawLoop(
 //#endregion
 
 // simple resizable shape
-const shape = new ResizableShape(100, 150, 200, 200);
+const shape = new Transformable(100, 100, 150, 150, 0);
 
 const canvas = createDrawLoop((gc) => {
   gc.fillStyle = "whitesmoke";
