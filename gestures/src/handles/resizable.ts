@@ -117,6 +117,11 @@ export class ResizableShape {
       case "scale":
         this.deltaWidth = dx;
         this.deltaHeight = dy;
+        {
+          const [ddx, ddy] = rotate(dx, dy, this.angle, 0, 0);
+          this.deltaX = ddx / 2;
+          this.deltaY = ddy / 2;
+        }
         console.log(`scale: ${dy}, ${dy}`);
         // this.start = { x: mx - this.offset.x, y: my - this.offset.y };
         break;
@@ -150,6 +155,8 @@ export class ResizableShape {
       case "scale":
         this.width += this.deltaWidth;
         this.height += this.deltaHeight;
+        this.x += this.deltaX;
+        this.y += this.deltaY;
         break;
       case "translate":
         this.x += this.deltaX;
@@ -180,11 +187,13 @@ export class ResizableShape {
     gc.translate(x, y);
 
     gc.rotate((angle * Math.PI) / 180);
-    gc.translate(-width / 2, -height / 2);
+
+    // gc.translate(-width / 2, -height / 2);
 
     gc.beginPath();
-    gc.rect(0, 0, width, height);
-    gc.fillStyle = "lightgrey";
+    gc.rect(-width / 2, -height / 2, width, height);
+    gc.fillStyle =
+      this.mode === "translate" ? "LightSkyBlue" : "LightGrey";
     gc.fill();
     gc.strokeStyle = "black";
     gc.lineWidth = 1;
@@ -192,34 +201,49 @@ export class ResizableShape {
 
     // scale handle
     gc.beginPath();
-    gc.arc(width, height, this.handleSize, 0, 2 * Math.PI);
-    gc.fillStyle = "white";
+    gc.arc(width / 2, height / 2, this.handleSize, 0, 2 * Math.PI);
+    gc.fillStyle = this.mode === "scale" ? "LightSkyBlue" : "white";
     gc.fill();
     gc.strokeStyle = "black";
     gc.stroke();
 
     // rotate handle
-    const handleX = width / 2;
-    const handleY = this.handleSize * 3;
+    const handleY = -height / 2 - this.handleSize * 3;
     gc.beginPath();
-    gc.moveTo(handleX, 0);
-    gc.lineTo(handleX, -handleY);
+    gc.moveTo(0, -height / 2);
+    gc.lineTo(0, handleY);
     gc.strokeStyle = "black";
     gc.stroke();
 
     gc.beginPath();
-    gc.arc(handleX, -handleY, this.handleSize, 0, 2 * Math.PI);
-    gc.fillStyle = "white";
+    gc.arc(0, handleY, this.handleSize, 0, 2 * Math.PI);
+    gc.fillStyle = this.mode === "rotate" ? "LightSkyBlue" : "white";
     gc.fill();
     gc.strokeStyle = "black";
     gc.stroke();
 
-    // for debugging
-    gc.beginPath();
-    gc.arc(width / 2, height / 2, 3, 0, 2 * Math.PI);
-    gc.fillStyle = "red";
-    gc.fill();
+    // draw centre to make demo easier to understand
+    gc.strokeStyle =
+      this.mode === "rotate" || this.mode === "scale"
+        ? "OrangeRed"
+        : "white";
+    drawCross(gc, 0, 0);
 
     gc.restore();
   }
+}
+
+function drawCross(
+  gc: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  size = 5
+) {
+  gc.beginPath();
+  gc.moveTo(x - size, y);
+  gc.lineTo(x + size, y);
+  gc.moveTo(x, y - size);
+  gc.lineTo(x, y + size);
+  gc.lineWidth = 1;
+  gc.stroke();
 }
